@@ -1,0 +1,42 @@
+<section class="login_section" ng-controller="page1Ctrl as p1">
+    <div class="header_container">
+
+    </div>
+    <div class="login_container clearfix">
+        <div class="logo clearfix">
+            <a href="">
+                <span>ملگرام</span>
+            </a>
+        </div>
+        <form>
+            <div class="content_login">
+                <div class="group user_name_group">
+                    <input type="text" required="" ng-model="p1.username">
+                    <i class="icon"></i>
+                    <span class="highlight"></span>
+
+                    <span class="bar"></span>
+                    <label>نام کاربری</label>
+                </div>
+                <div class="group pass_group">
+                    <input type="password" required="" ng-model="p1.pass">
+                    <i class="icon"></i>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>رمز عبور</label>
+                </div>
+                <!--<div class="group">-->
+                    <!--<input type="text" required="" ng-model="p1.phone">-->
+                    <!--<span class="highlight"></span>-->
+                    <!--<span class="bar"></span>-->
+                    <!--<label>شماره موبایل</label>-->
+                <!--</div>-->
+                <div class="footer_login_form">
+                    <button ng-click="p1.login(p1.username,p1.pass,p1.phone)">ورود</button>
+                    <button ng-click="p1.register()">ثبت نام </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

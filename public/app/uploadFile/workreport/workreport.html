@@ -1,0 +1,51 @@
+<section class="section_upload_container">
+    <header class="header_section">
+        <h2>ارسال فایل های ویدیویی</h2>
+    </header>
+    <main class="main_upload_section clearfix">
+        <div class="upload_filter clearfix">
+            <div class="upload_filter_right clearfix">
+                <label>مرتب سازی براساس</label>
+                <select>
+                    <option>تعداد بازید</option>
+                    <option>براساس تاریخ</option>
+                </select>
+            </div>
+            <div class="upload_filter_left clearfix">
+                <form name="upload" class="form_upload" data-ng-submit="addFile()">
+                    <div class="upload_key">
+
+                        <div class="upload_loader_wrapper">
+                            <svg class="spinner" width="23px" height="32px" viewBox="0 0 66 66"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round"
+                                        cx="33" cy="33" r="30"></circle>
+                            </svg>
+
+                            <button class="submit_uploadFile" type="submit"></button>
+                        </div>
+                        <label class="clearfix" for="browse">
+
+                            <span class="linkToBrowse_upload"></span>
+
+
+                            <div id="progress" ng-style="{width: progress + '%'}"></div>
+                            <!------------- اسم فایل ---------------->
+                            <span>آپلود فایل جدید</span>
+                            <input id="browse" type="file" name="file" multiple
+                                   onchange="angular.element(this).scope().uploadedFile(this)"/>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class=" clearfix">
+            <fieldset class="text_insert ">
+                <legend>گزارش عملکرد</legend>
+                <div class="">
+
+                </div>
+            </fieldset>
+        </div>
+    </main>
+</section>

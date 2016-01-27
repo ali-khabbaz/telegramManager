@@ -1,0 +1,469 @@
+<section class="section_upload_container" ng-controller="advertiseCtrl as ad">
+    <div class="nano" style="height: 99vh;">
+        <div class="nano-content archive_content_text clearfix">
+            <header class="header_section">
+                <h2>متن های تبلیغاتی</h2>
+            </header>
+            <main class="main_upload_section clearfix">
+
+                <fieldset class="text_insert onlineAdver clearfix">
+                    <legend>پیام های تبلیغاتی آنلاین</legend>
+                    <p>
+                        شما میتوانید در هفت روز مجاز تبلیغات شعارهای خود را به نرم اندروید ملگرام ارسال کنید
+                    </p>
+                    <div class="accordion_wrapper">
+                        <div class="text_insert massageAdvers clearfix">
+                            <h3 class="advertise_massage_header accordion_header"
+                                ng-click="ad.accordion($event)">پیام
+                                های
+                                تبلیغاتی روز اول</h3>
+
+                            <div class="advertise_massage accordion_main clearfix">
+
+                                <p>پیام های تبلیغاتی زیر به ترتیب بروی حوزه تبلیغاتی شما تبلیغ خواهد شد:</p>
+                                <div class="massage_photo clearfix">
+                                    <figure class="clearfix">
+                                        <img src="css/img/telegram_img/placeholders/UserAvatar4@2x.png">
+                                        <label class="browse_advertise clearfix" for="photo">
+                                            <input id="photo" type="file">
+                                        </label>
+                                    </figure>
+
+                                </div>
+                                <div class="clearfix">
+                                    <div class="massage_title">
+                                        <label for="title">عنوان پیام</label>
+                                        <input id= "title" type="text" ng-model="ad.advertise.title">
+                                    </div>
+
+                                </div>
+                                <div class="clearfix">
+                                    <ul class="massage_list">
+                                        <li class="massage_list_item">
+                                            <label>پیام اول</label>
+                                            <input type="text" ng-model="ad.advertise.text1">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام دوم</label>
+                                            <input type="text" ng-model="ad.advertise.text2">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام سوم</label>
+                                            <input type="text" ng-model="ad.advertise.text3">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام چهارم</label>
+                                            <input type="text" ng-model="ad.advertise.text4">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="count_Adver clearfix">
+                                    <p>تعداد تکرار این تبیلغ در طول هر ۱ دقیقه</p>
+                                    <select ng-model="ad.count">
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                    </select>
+
+                                    <p>بار باشد .که این تعداد در طول هر روز با <span>{{ad.count*1000}} مرتبه</span>
+                                        برابر
+                                        می
+                                        شود.</p>
+                                </div>
+                                </select>
+                                <div class="content_new_text_buttons clearfix">
+                                    <button ng-click="ad.sendAdvertise(1)" class="">ارسال</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text_insert massageAdvers clearfix">
+                            <h3 class="advertise_massage_header accordion_header" ng-click="ad.accordion($event)">
+                                پیام
+                                های
+                                تبلیغاتی روز دوم
+                            </h3>
+
+                            <div class="advertise_massage accordion_main clearfix">
+
+                                <p>پیام های تبلیغاتی زیر به ترتیب بروی حوزه تبلیغاتی شما تبلیغ خواهد شد:</p>
+                                <div class="massage_photo clearfix">
+                                    <figure class="clearfix">
+                                        <img src="css/img/telegram_img/placeholders/UserAvatar4@2x.png">
+                                        <label class="browse_advertise clearfix" for="photo">
+                                            <input id="photo" type="file">
+                                        </label>
+                                    </figure>
+
+                                </div>
+                                <div class="clearfix">
+                                    <div class="massage_title">
+                                        <label for="title">عنوان پیام</label>
+                                        <input id= "title" type="text" ng-model="ad.advertise.title">
+                                    </div>
+
+                                </div>
+                                <div class="clearfix">
+                                    <ul class="massage_list">
+                                        <li class="massage_list_item">
+                                            <label>پیام اول</label>
+                                            <input type="text" ng-model="ad.advertise.text1">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام دوم</label>
+                                            <input type="text" ng-model="ad.advertise.text2">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام سوم</label>
+                                            <input type="text" ng-model="ad.advertise.text3">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام چهارم</label>
+                                            <input type="text" ng-model="ad.advertise.text4">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="count_Adver clearfix">
+                                    <p>تعداد تکرار این تبیلغ در طول هر ۱ دقیقه</p>
+                                    <select ng-model="ad.count">
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                    </select>
+
+                                    <p>بار باشد .که این تعداد در طول هر روز با <span>{{ad.count*1000}} مرتبه</span>
+                                        برابر
+                                        می
+                                        شود.</p>
+                                </div>
+                                </select>
+                                <div class="content_new_text_buttons clearfix">
+                                    <button ng-click="ad.sendAdvertise(1)" class="">ارسال</button>
+                                </div>
+                            </div>                        </div>
+                        <div class="text_insert massageAdvers clearfix">
+                            <h3 class="advertise_massage_header accordion_header" ng-click="ad.accordion($event)">پیام
+                                های
+                                تبلیغاتی روز سوم
+                            </h3>
+
+                            <div class="advertise_massage accordion_main clearfix">
+
+                                <p>پیام های تبلیغاتی زیر به ترتیب بروی حوزه تبلیغاتی شما تبلیغ خواهد شد:</p>
+                                <div class="massage_photo clearfix">
+                                    <figure class="clearfix">
+                                        <img src="css/img/telegram_img/placeholders/UserAvatar4@2x.png">
+                                        <label class="browse_advertise clearfix" for="photo">
+                                            <input id="photo" type="file">
+                                        </label>
+                                    </figure>
+
+                                </div>
+                                <div class="clearfix">
+                                    <div class="massage_title">
+                                        <label for="title">عنوان پیام</label>
+                                        <input id= "title" type="text" ng-model="ad.advertise.title">
+                                    </div>
+
+                                </div>
+                                <div class="clearfix">
+                                    <ul class="massage_list">
+                                        <li class="massage_list_item">
+                                            <label>پیام اول</label>
+                                            <input type="text" ng-model="ad.advertise.text1">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام دوم</label>
+                                            <input type="text" ng-model="ad.advertise.text2">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام سوم</label>
+                                            <input type="text" ng-model="ad.advertise.text3">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام چهارم</label>
+                                            <input type="text" ng-model="ad.advertise.text4">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="count_Adver clearfix">
+                                    <p>تعداد تکرار این تبیلغ در طول هر ۱ دقیقه</p>
+                                    <select ng-model="ad.count">
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                    </select>
+
+                                    <p>بار باشد .که این تعداد در طول هر روز با <span>{{ad.count*1000}} مرتبه</span>
+                                        برابر
+                                        می
+                                        شود.</p>
+                                </div>
+                                </select>
+                                <div class="content_new_text_buttons clearfix">
+                                    <button ng-click="ad.sendAdvertise(1)" class="">ارسال</button>
+                                </div>
+                            </div>                        </div>
+                        <div class="text_insert massageAdvers clearfix">
+                            <h3 class="advertise_massage_header accordion_header" ng-click="ad.accordion($event)">پیام
+                                های
+                                تبلیغاتی روز چهارم</h3>
+
+                            <div class="advertise_massage accordion_main clearfix">
+
+                                <p>پیام های تبلیغاتی زیر به ترتیب بروی حوزه تبلیغاتی شما تبلیغ خواهد شد:</p>
+                                <div class="massage_photo clearfix">
+                                    <figure class="clearfix">
+                                        <img src="css/img/telegram_img/placeholders/UserAvatar4@2x.png">
+                                        <label class="browse_advertise clearfix" for="photo">
+                                            <input id="photo" type="file">
+                                        </label>
+                                    </figure>
+
+                                </div>
+                                <div class="clearfix">
+                                    <div class="massage_title">
+                                        <label for="title">عنوان پیام</label>
+                                        <input id= "title" type="text" ng-model="ad.advertise.title">
+                                    </div>
+
+                                </div>
+                                <div class="clearfix">
+                                    <ul class="massage_list">
+                                        <li class="massage_list_item">
+                                            <label>پیام اول</label>
+                                            <input type="text" ng-model="ad.advertise.text1">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام دوم</label>
+                                            <input type="text" ng-model="ad.advertise.text2">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام سوم</label>
+                                            <input type="text" ng-model="ad.advertise.text3">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام چهارم</label>
+                                            <input type="text" ng-model="ad.advertise.text4">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="count_Adver clearfix">
+                                    <p>تعداد تکرار این تبیلغ در طول هر ۱ دقیقه</p>
+                                    <select ng-model="ad.count">
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                    </select>
+
+                                    <p>بار باشد .که این تعداد در طول هر روز با <span>{{ad.count*1000}} مرتبه</span>
+                                        برابر
+                                        می
+                                        شود.</p>
+                                </div>
+                                </select>
+                                <div class="content_new_text_buttons clearfix">
+                                    <button ng-click="ad.sendAdvertise(1)" class="">ارسال</button>
+                                </div>
+                            </div>                        </div>
+                        <div class="text_insert massageAdvers clearfix">
+                            <h3 class="advertise_massage_header accordion_header" ng-click="ad.accordion($event)">پیام
+                                های
+                                تبلیغاتی روز پنجم</h3>
+
+                            <div class="advertise_massage accordion_main clearfix">
+
+                                <p>پیام های تبلیغاتی زیر به ترتیب بروی حوزه تبلیغاتی شما تبلیغ خواهد شد:</p>
+                                <div class="massage_photo clearfix">
+                                    <figure class="clearfix">
+                                        <img src="css/img/telegram_img/placeholders/UserAvatar4@2x.png">
+                                        <label class="browse_advertise clearfix" for="photo">
+                                            <input id="photo" type="file">
+                                        </label>
+                                    </figure>
+
+                                </div>
+                                <div class="massage_title">
+                                    <label for="title">عنوان پیام</label>
+                                    <input id= "title" type="text" ng-model="ad.advertise.title">
+                                </div>
+                                <ul class="massage_list">
+                                    <li class="massage_list_item">
+                                        <label>پیام اول</label>
+                                        <input type="text" ng-model="ad.advertise.text1">
+                                    </li>
+                                    <li class="massage_list_item">
+                                        <label>پیام دوم</label>
+                                        <input type="text" ng-model="ad.advertise.text2">
+                                    </li>
+                                    <li class="massage_list_item">
+                                        <label>پیام سوم</label>
+                                        <input type="text" ng-model="ad.advertise.text3">
+                                    </li>
+                                    <li class="massage_list_item">
+                                        <label>پیام چهارم</label>
+                                        <input type="text" ng-model="ad.advertise.text4">
+                                    </li>
+                                </ul>
+                                <div class="count_Adver clearfix">
+                                    <p>تعداد تکرار این تبیلغ در طول هر ۱ دقیقه</p>
+                                    <select ng-model="ad.count">
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                    </select>
+
+                                    <p>بار باشد .که این تعداد در طول هر روز با <span>{{ad.count*1000}}</span>مرتبه برابر
+                                        می
+                                        شود.</p>
+                                </div>
+                                </select>
+                                <div class="content_new_text_buttons clearfix">
+                                    <button ng-click="ad.sendAdvertise(5)" class="">ارسال</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text_insert massageAdvers clearfix">
+                            <h3 class="advertise_massage_header accordion_header" ng-click="ad.accordion($event)">پیام
+                                های
+                                تبلیغاتی روز ششم</h3>
+
+                            <div class="advertise_massage accordion_main clearfix">
+
+                                <p>پیام های تبلیغاتی زیر به ترتیب بروی حوزه تبلیغاتی شما تبلیغ خواهد شد:</p>
+                                <div class="massage_photo clearfix">
+                                    <figure class="clearfix">
+                                        <img src="css/img/telegram_img/placeholders/UserAvatar4@2x.png">
+                                        <label class="browse_advertise clearfix" for="photo">
+                                            <input id="photo" type="file">
+                                        </label>
+                                    </figure>
+
+                                </div>
+                                <div class="clearfix">
+                                    <div class="massage_title">
+                                        <label for="title">عنوان پیام</label>
+                                        <input id= "title" type="text" ng-model="ad.advertise.title">
+                                    </div>
+
+                                </div>
+                                <div class="clearfix">
+                                    <ul class="massage_list">
+                                        <li class="massage_list_item">
+                                            <label>پیام اول</label>
+                                            <input type="text" ng-model="ad.advertise.text1">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام دوم</label>
+                                            <input type="text" ng-model="ad.advertise.text2">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام سوم</label>
+                                            <input type="text" ng-model="ad.advertise.text3">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام چهارم</label>
+                                            <input type="text" ng-model="ad.advertise.text4">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="count_Adver clearfix">
+                                    <p>تعداد تکرار این تبیلغ در طول هر ۱ دقیقه</p>
+                                    <select ng-model="ad.count">
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                    </select>
+
+                                    <p>بار باشد .که این تعداد در طول هر روز با <span>{{ad.count*1000}} مرتبه</span>
+                                        برابر
+                                        می
+                                        شود.</p>
+                                </div>
+                                </select>
+                                <div class="content_new_text_buttons clearfix">
+                                    <button ng-click="ad.sendAdvertise(1)" class="">ارسال</button>
+                                </div>
+                            </div>                        </div>
+                        <div class="text_insert massageAdvers clearfix">
+                            <h3 class="advertise_massage_header accordion_header" ng-click="ad.accordion($event)">پیام
+                                های
+                                تبلیغاتی روز هفتم</h3>
+
+                            <div class="advertise_massage accordion_main clearfix">
+
+                                <p>پیام های تبلیغاتی زیر به ترتیب بروی حوزه تبلیغاتی شما تبلیغ خواهد شد:</p>
+                                <div class="massage_photo clearfix">
+                                    <figure class="clearfix">
+                                        <img src="css/img/telegram_img/placeholders/UserAvatar4@2x.png">
+                                        <label class="browse_advertise clearfix" for="photo">
+                                            <input id="photo" type="file">
+                                        </label>
+                                    </figure>
+
+                                </div>
+                                <div class="clearfix">
+                                    <div class="massage_title">
+                                        <label for="title">عنوان پیام</label>
+                                        <input id= "title" type="text" ng-model="ad.advertise.title">
+                                    </div>
+
+                                </div>
+                                <div class="clearfix">
+                                    <ul class="massage_list">
+                                        <li class="massage_list_item">
+                                            <label>پیام اول</label>
+                                            <input type="text" ng-model="ad.advertise.text1">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام دوم</label>
+                                            <input type="text" ng-model="ad.advertise.text2">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام سوم</label>
+                                            <input type="text" ng-model="ad.advertise.text3">
+                                        </li>
+                                        <li class="massage_list_item">
+                                            <label>پیام چهارم</label>
+                                            <input type="text" ng-model="ad.advertise.text4">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="count_Adver clearfix">
+                                    <p>تعداد تکرار این تبیلغ در طول هر ۱ دقیقه</p>
+                                    <select ng-model="ad.count">
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                    </select>
+
+                                    <p>بار باشد .که این تعداد در طول هر روز با <span>{{ad.count*1000}} مرتبه</span>
+                                        برابر
+                                        می
+                                        شود.</p>
+                                </div>
+                                </select>
+                                <div class="content_new_text_buttons clearfix">
+                                    <button ng-click="ad.sendAdvertise(1)" class="">ارسال</button>
+                                </div>
+                            </div>                        </div>
+                    </div>
+                </fieldset>
+            </main>
+        </div>
+
+    </div>
+</section>

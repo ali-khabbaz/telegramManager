@@ -1,0 +1,9 @@
+<div ng-controller="smsCtrl as sms">
+    <form>
+    	<h1>ارسال پیام</h1>
+    	<input placeholder="شماره" ng-model="sms.number" required autofocus><<br>
+        <input placeholder="نام" ng-model="sms.fname" required><br>
+    	<input placeholder="فامیل" ng-model="sms.lname" required><br>
+    	<button type="submit" class="submit_btn" ng-click="sms.send()" >ارسال</button>
+    </form>
+</div>

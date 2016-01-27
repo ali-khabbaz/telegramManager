@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/telegram_lib/app.css" />
+    <link rel="stylesheet" type="text/css" href="/telegram_lib/desktop.css" />
+    <link rel="stylesheet" type="text/css" href="/vendor/jquery.nanoscroller/nanoscroller.css" />
+    <link rel="stylesheet" type="text/css" href="/css/angucomplete-alt.css" />
+    <link rel="stylesheet" type="text/css" href="/vendor/costum.scroller/jquery.mCustomScrollbar.min.css" />
+    <link rel="icon" href="/css/img/telegram_lib/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="/css/style_customize.css"/>
+	<meta name="fragment" content="!">
+	<meta charset="UTF-8">
+	<title>Comtel Microwave</title>
+</head>
+<body ng-controller="MainViewCtrl as mainView">
+	<!--<div class="divider_list_wrapper" ng-if="mainView.showDivider">-->
+		<!--<ul class="divider_list">-->
+			<!--<li><a class="divider_list_item active video_divider"><span></span></a></li>-->
+			<!--<li><a class="divider_list_item img_divider"><span></span></a></li>-->
+			<!--<li><a class="divider_list_item graphic_divider"><span></span></a></li>-->
+			<!--<li><a class="divider_list_item text_divider"><span></span></a></li>-->
+		<!--</ul>-->
+	<!--</div>-->
+	<!--<p ng-click="mainView.logOut()">logOut</p>-->
+	<div class="page_container" ng-view></div>
+</body>
+<script type="text/javascript" src="/vendor/require.js" data-main="../app/main.js"></script>
+</html>
