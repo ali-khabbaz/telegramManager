@@ -1533,7 +1533,7 @@ input:focus ~ .bar:after {
     font-size: 14px;
     font-weight: 500;
     float: right;
-    margin-right: 16px;
+    margin-right: 34px;
 }
 
 .intro_buttons .order:hover, .order_robot_section_link:hover {
@@ -1674,6 +1674,9 @@ input:focus ~ .bar:after {
 .news_content svg{
     height: 300px;
     width: 100%;
+}
+.news_content svg path{
+    cursor: pointer;
 }
 .list_news li:first-child, .list_usual_question li:first-child {
     padding-top: 0;
@@ -1858,6 +1861,8 @@ footer {
     /* float: right; */
     background-color: #fefefe;
     border: 1px solid #cdcdcd;
+    border-radius: 3px;
+    border-bottom: 3px solid #b6b6b6;
 }
 
 .content_form {
@@ -1882,7 +1887,7 @@ footer {
 }
 
 .two_column label {
-    width: 24%;
+    width: 21%;
     float: right;
     font-weight: normal;
 }
@@ -1892,7 +1897,7 @@ footer {
     border: 1px solid #999;
     padding: 1px 5px;
     margin-right: 10px;
-    width: 73%;
+    width: 76%;
     float: left;
     line-height: 2;
 }
@@ -2396,17 +2401,21 @@ footer ul li img {
 }
 
 .header_news {
-    background: url("../css/img/telegram_img/section_header_bg.png");
+    background: #f8f8f8;
+    /* background: url("../css/img/telegram_img/section_header_bg.png"); */
     margin-bottom: 2px;
-    border: 1px solid #ddd;
+    border: 1px solid #bbb;
+    border-right: 3px solid #a94442;
+    border-radius: 4px;
 }
 
 .header_news h4 {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 500;
-    /*margin: 25px 0 0;*/
-    padding-right: 15px;
-    color: #3d5afe;
+    /* margin: 25px 0 0; */
+    padding-right: 10px;
+    color: #454545;
+    line-height: 2.25;
 }
 
 /*.header_news:before {*/
@@ -2474,12 +2483,12 @@ p.body_news {
 }
 
 /************************* OnlineAdvertisement ********************************/
-fieldset.onlineAdver legend {
-    width: 19%;
-}
+/*fieldset.onlineAdver legend {*/
+/*width: 19%;*/
+/*}*/
 
 fieldset.massageAdvers legend {
-    width: 21%;
+    /*width: 21%;*/
     padding: 7px;
 }
 
@@ -2492,7 +2501,6 @@ fieldset.massageAdvers legend {
     font-size: 13px;
     background-color: #f5f5f5;
     padding: 7px 8px;
-
     border: 1px solid #cecece;
     border-bottom: none;
     border-right: 3px solid #7eaad1;
@@ -2591,7 +2599,7 @@ fieldset.massageAdvers legend {
     color: #333;
     font-size: 13px;
 }
- input[type='file']{
+input[type='file']{
     display: none;
 }
 
@@ -2726,8 +2734,18 @@ p.contact_body {
     margin-right: 5px;
 }
 /************************* Intro ************************************/
-.header_intro{
-    padding: 0 15px;
+.intro_section_header{
+    width: 96%;
+    margin: 10px auto 5px;
+}
+.intro_context_container{
+    background-color: #fff;
+    border-radius: 6px;
+    border-bottom: 3px solid #b6b6b6;
+}
+.intro_wrapper{
+    width: 96%;
+    margin: 0 auto;
 }
 .image_wrapper{
     float: left;
@@ -2738,9 +2756,48 @@ p.contact_body {
     display: table;
 }
 .intro_content {
-    padding: 10px 0;
+    padding: 10px 10px;
     width: 70%;
     float: right;
+}
+.intro_guide_wrapper{
+    background-color: #fff;
+    margin: 10px 0;
+    border-radius: 6px;
+    border-bottom: 3px solid #b6b6b6;
+}
+.intro_guide_header h4{
+    padding: 10px 20px;
+    position: relative;
+    color: #444;
+}
+.intro_guide_header h4:after{
+    background: #e5e5e5;
+    content: "";
+    height: 1px;
+    position: absolute;
+    right: 91px;
+    top: 30px;
+    width: 88%;
+}
+h4.guide_intro_item_header {
+    font-size: 15px;
+    padding: 0 20px 0 0;
+    color: #666;
+}
+li.list_guide_intro_item {
+    padding-right: 10px;
+    margin-bottom: 10px;
+}
+p.guide_intro_item_content {
+    padding: 0 30px;
+}
+.intro_coming_ver{
+    background-color: #fff;
+    margin: 10px 0;
+    border-radius: 6px;
+    border-bottom: 3px solid #b6b6b6;
+    padding: 32px;
 }
 /************************* panel_intro ************************************/
 
@@ -2750,11 +2807,36 @@ p.contact_body {
     float: right;
 }
 .image_wrapper img{
-    margin: 0 auto;
+    margin: 10px auto;
     display: table;
 }
 .panel_intro_section .panel_intro_content {
-    padding: 10px 20px;
+    padding: 10px 0;
     width: 55%;
     float: right;
+}
+/************************* cooperation ************************************/
+.cooperation_context_container{
+    padding: 16px 24px 70px 24px;
+    background-color: #fff;
+    margin: 25px 0;
+    border-radius: 6px;
+    border-bottom: 3px solid #b6b6b6;
+}
+.header_cooperation{
+    margin-bottom: 10px;
+}
+.header_cooperation h4{
+    color: #2e7d32;
+}
+h4.header_context_cooperation{
+    font-size: 14px;
+    margin: 10px 0;
+    color: #0f91af;
+}
+a.link_cooperation{
+    color: #3D5AFE;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: underline;
 }

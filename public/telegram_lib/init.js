@@ -145,7 +145,6 @@
 		bootReady.i18n_ng = Config.I18n.locale == defaultLocale; // Already included
 
 		$.getJSON('js/locales/' + Config.I18n.locale + '.json').success(function (json) {
-			console.log('----json1111---', json);
 			Config.I18n.messages = json;
 			bootReady.i18n_messages = true;
 			if (Config.I18n.locale == defaultLocale) { // No fallback, leave empty object

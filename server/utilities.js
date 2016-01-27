@@ -5,29 +5,10 @@
         jwt = require('./requires.js').jwt,
         c = require('./requires.js').c;
 
-   /* function showDb(myquery) {
-        var dfd = q.defer(),
-            res_result = [];
-        var query = c.query(myquery);
-        query.on('result', function (res) {
-            // `res` is a streams2+ Readable object stream
-            res.on('data', function (row) {
-                res_result.push(row);
-            }).on('row', function (row) {
-                res_result.push(row);
-            }).on('end', function () {
-                console.log('Result set finished');
-            });
-        }).on('end', function () {
-            dfd.resolve(res_result);
-        });
-        return dfd.promise;
-    }*/
     function showDb(query) {
         var dfd = q.defer(),
             res_result = [];
         c.query(query).on('result', function (res) {
-            // `res` is a streams2+ Readable object stream
             res.on('data', function (row) {
                 res_result.push(row);
             }).on('row', function (row) {
@@ -42,7 +23,6 @@
             dfd.resolve(res_result);
             console.log('No more result sets!');
         });
-        //c.end();
         return dfd.promise;
     }
 

@@ -3,7 +3,6 @@
 angular.module('myApp.i18n', ['izhukov.utils'])
 	.factory('_', ['$rootScope', '$locale', function ($rootScope, $locale) {
 		var locale = Config.I18n.locale;
-		console.log('-----%%%%%%%%%%%%%---', locale);
 		var messages = Config.I18n.messages;
 		var fallbackMessages = Config.I18n.fallback_messages;
 		var paramRegEx = /\{\s*([a-zA-Z\d\-_]+)(?:\s*:\s*(.*?))?\s*\}/g;
@@ -64,7 +63,6 @@ angular.module('myApp.i18n', ['izhukov.utils'])
 					msgstr = insertParams(msgstr, params);
 				}
 			}
-
 		return msgstr;
 		}
 

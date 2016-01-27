@@ -728,6 +728,7 @@ angular.module('izhukov.mtproto.wrapper', ['izhukov.utils', 'izhukov.mtproto'])
 							if (doneParts >= totalParts) {
 								deferred.resolve(resultInputFile);
 								resolved = true;
+								setProgress(1);
 							} else {
 								console.log(dT(), 'Progress', doneParts * partSize / fileSize);
 								deferred.notify({

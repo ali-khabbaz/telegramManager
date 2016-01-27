@@ -83,7 +83,6 @@ angular.module('myApp.services')
 	var minDialogsIndex = Math.pow(2, 50);
 
 	function getConversations(query, offsetIndex, limit) {
-		console.log('-------------------getConversation------------------', dialogsStorage);
 
 		var curDialogStorage = dialogsStorage;
 		var isSearch = angular.isString(query) && query.length;
@@ -534,16 +533,17 @@ angular.module('myApp.services')
 
 	function getHistory(inputPeer, maxID, limit, backLimit, prerendered) {
 
+		//console.log('getHistory----------', inputPeer, maxID, limit, backLimit, prerendered);
 		var peerID;
 		peerID = AppPeersManager.getPeerID(inputPeer);
-		console.log(historiesStorage[peerID], '-----getHistory--===', inputPeer, maxID, limit, backLimit, prerendered);
+		//console.log(historiesStorage[peerID], '-----getHistory--===', inputPeer, maxID, limit, backLimit, prerendered);
+
 		var historyStorage = historiesStorage[peerID],
 			offset = 0,
 			offsetNotFound = false,
 			unreadOffset = false,
 			unreadSkip = false;
-		console.log(peerID, '-----getHistory--===', inputPeer, maxID, limit, backLimit, prerendered);
-
+		//console.log(peerID, '-----getHistory--===', inputPeer, maxID, limit, backLimit, prerendered);
 		prerendered = prerendered ? Math.min(50, prerendered) : 0;
 
 		if (historyStorage === undefined) {
@@ -655,7 +655,6 @@ angular.module('myApp.services')
 			if (!maxID && historyStorage.pending.length) {
 				history = historyStorage.pending.slice().concat(history);
 			}
-			console.log('--------history-------', history);
 			return wrapHistoryResult(peerID, {
 				count: historyStorage.count,
 				history: history,

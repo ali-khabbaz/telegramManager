@@ -55,7 +55,7 @@ define(['app'], function (app) {
 				dependencies: [
 					'/app/uploadFile/uploadCtrl.js'
 					/*,
-										'/app/uploadFile/advertise/onlinetextDirective.js'*/
+					 '/app/uploadFile/advertise/onlinetextDirective.js'*/
 				]
 			},
 			'/intro': {
@@ -63,8 +63,7 @@ define(['app'], function (app) {
 				dependencies: [
 					'/app/home/homeCtrl.js'
 				]
-			},
-			'/introPanel': {
+			},'/introPanel': {
 				templateUrl: '/app/introPanel/introPanel.html',
 				dependencies: [
 					'/app/home/homeCtrl.js'
@@ -82,22 +81,16 @@ define(['app'], function (app) {
 					'/app/video/videoCtrl.js'
 				]
 			},
-			'/chanelManage': {
-				templateUrl: '/app/chanelManage/chanelManage.html',
-				dependencies: [
-					'/app/chanelManage/chanelManageCtrl.js'
-				]
-			},
 			'/robot': {
 				templateUrl: '/app/robot/robot.html',
 				dependencies: [
 					'/app/robot/robotCtrl.js'
 				]
 			},
-			'/Cooperation': {
-				templateUrl: '/app/Cooperation/Cooperation.html',
+			'/contactUs': {
+				templateUrl: '/app/contactus/contactus.html',
 				dependencies: [
-					'/app/Cooperation/CooperationCtrl.js'
+					'/app/home/homeCtrl.js'
 				]
 			},
 			'/question': {
