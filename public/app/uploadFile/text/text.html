@@ -1,0 +1,133 @@
+<section class="section_upload_container" ng-controller='textCtrl as v'>
+    <div class="nano" style="height: 99vh">
+        <div class="nano-content archive_content_text clearfix">
+            <header class="header_section">
+                <h2>ارسال فایل های متنی</h2>
+            </header>
+            <main class="main_upload_section clearfix">
+                <fieldset class="text_insert clearfix">
+                    <legend>متن ورودی</legend>
+                    <div class="content_new_text clearfix">
+                        <!--<div class="header_text_wrapper">
+                            <label>عنوان:</label>
+
+                            <div><input type="text"></div>
+                        </div>-->
+                        <div class="header_contact_wrapper">
+                            <label>ارسال به</label>
+                            <select ng-model="v.selected_chanel"
+                                    ng-options="c.title for c in v.creator_channel">
+                            </select>
+                        </div>
+                        <div class="text_area_wrapper" id="message_body_channel">
+                                            <textarea rows="4" ng-model="v.text"
+
+                                                      placeholder="متن جدید را در این قسمت تایپ کنید."></textarea>
+                        </div>
+
+                        <div class="content_new_text_buttons">
+
+
+                            <button ng-click="v.sendText()">ارسال</button>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="text_insert text_archive">
+                    <legend>آرشیو متن های ارسالی</legend>
+                    <div class="text_container clearfix">
+                        <ul class="list_text clearfix">
+                            <li class="clearfix">
+                                <p>اینو این آخر آوردم چون تقریبا آخرهای سمینار یه بنده خدایی گفت این همه
+                                    حرف
+                                    زدید
+                                    اما من نفهمیدم کاربردپذیری یعنی چی! این مشکل رو چون من توی سمینارهای
+                                    ...</p>
+                                <ul class="list_group_icon_text">
+                                    <li class="list_group_icon_text_item delete"><a></a></li>
+                                    <li class="list_group_icon_text_item send"><a></a></li>
+                                    <li class="list_group_icon_text_item view"><a><span>67</span></a>
+                                    </li>
+                                </ul>
+                                <div class="full_text_archive_text clearfix">
+                                    <header class="header_archive_text">
+                                        <h3>نیاز واقعی باید شکل بگیره، اما چطوری؟</h3>
+
+                                    </header>
+                                    <div class="full_text_archive_icons"><a
+                                            class="full_text_archive_icon_close"></a>
+
+                                        <p class="full_text_archive_date">1394/06/20</p></div>
+                                    <p>رقابت هست اما کم است، قسمت های انحصاری زیاد است، اطلاعات شفاف
+                                        نیست. همه
+                                        این
+                                        ها از مهمترین دلایلی هست که باعث می شه نیاز واقعی شکل نگیره. اما
+                                        آیا
+                                        باید
+                                        دست رو دست بزاریم بگیم تا وقتی اینا درست نشه پس هیچ کاری نمی شه
+                                        کرد؟ خب
+                                        نه!
+
+                                        اردشیر طیبی وقتی صفحه اینستاگرام گرجی رو به من نشون داد گفت این
+                                        صفحه
+                                        انقدر
+                                        خوبه که بقیه می رن با نمایش دادنش به شرکت های دیگه اون ها رو
+                                        راضی می
+                                        کنند که
+                                        براشون کارهای سوشیال مدیا مارکتینگ انجام بدهند و این خیلی خوبه.
+                                        چرا؟
+
+                                        چون این یک بازار جدید هست و هنوز باور درستی برای انجام کار به
+                                        شیوه درست
+                                        شکل
+                                        نگرفته (بخوانید: اینستاگرام من بزرگتره) و همین کارهای درست وقتی
+                                        توسط
+                                        شرکت
+                                        های مختلف انجام بشه خیلی راحت بقیه شرکت ها رو می شه متقاعد کرد
+                                        تا اون ها
+                                        هم
+                                        وارد این مسیر بشوند. علاوه بر این ما هم با داشتن نمونه ای معروف
+                                        و خوب
+                                        همواره
+                                        می تونیم مشتری های گران قیمت تر و بهتری جذب کنیم.
+
+                                        دوست عزیزی که در حوزه کاربردپذیری می خواهی فعالیت کنی و از نفهمی
+                                        مدیران
+                                        و
+                                        سازمان ها گلایه داری، اینکه هیچوقت کار تخصصی پیدا نکردی و کلی
+                                        چیزه دیگه.
+                                        از
+                                        نظر من اگر نمونه های عملی مثل مبین نت که در بالا عنوان شد، با
+                                        ذکر
+                                        توضیحات
+                                        بیشتر و عددهای مشخص تر ایجاد بشه می تونه خیلی از این مشکلات رو
+                                        حل کنه.
+                                        مدیر
+                                        از نظر خیلی ها نفهم، تا وقتی که حس نکته یک هزینه ای براش سود آور
+                                        نیست
+                                        معلومه
+                                        قبول نمی کنه و این کارها رو نمایشی و برای شرکت های متصل به شیر
+                                        نفت می
+                                        دونه.</p>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <p>اینو این آخر آوردم چون تقریبا آخرهای سمینار یه بنده خدایی گفت این همه
+                                    حرف
+                                    زدید
+                                    اما من نفهمیدم کاربردپذیری یعنی چی! این مشکل رو چون من توی سمینارهای
+                                    ...</p>
+                                <ul class="list_group_icon_text">
+                                    <li class="list_group_icon_text_item delete"><a></a></li>
+                                    <li class="list_group_icon_text_item send"><a></a></li>
+                                    <li class="list_group_icon_text_item view"><a><span>67</span></a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div>
+                </fieldset>
+            </main>
+        </div>
+    </div>
+</section>

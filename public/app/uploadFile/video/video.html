@@ -1,0 +1,100 @@
+<section class="section_upload_container">
+    <header class="header_section">
+        <h2>ارسال فایل های ویدیویی</h2>
+    </header>
+    <div class="overlay" ng-click="fadeOut()" ng-if="showSendFile"></div>
+    <div class="upload_contacts" ng-if="showSendFile">
+        <div class="md_modal_head md_modal_head_simple">
+            <div class="md_modal_title_wrap">
+                <div class="md_modal_actions_wrap clearfix">
+                    <!--<a class="md_modal_action md_modal_action_close">Close</a>-->
+                </div>
+            </div>
+            <div class="md_modal_title">ارسال فایل</div>
+        </div>
+        <div class="im_dialogs_panel clearfix">
+            <div class="im_dialogs_search">
+                <input  class="form-control im_dialogs_search_field no_outline ng-pristine ng-valid ng-touched"
+                       type="search" placeholder="Search" ng-model="search" autocomplete="off">
+            </div>
+        </div>
+        <div class="list_contacts clearfix">
+            <ul class="clearfix">
+                <li data-ng-repeat="profile in contacts | filter:search"
+                    ng-click="sendFile(0,profile.peerData.id)">
+                    {{profile.peerData.username}}
+                    {{profile.peerData.first_name}}
+                    {{profile.peerData.title}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <main class="main_upload_section clearfix">
+        <div class="upload_filter clearfix">
+            <div class="upload_filter_right clearfix">
+                <label>مرتب سازی براساس</label>
+                <select>
+                    <option>تعداد بازید</option>
+                    <option>براساس تاریخ</option>
+                </select>
+            </div>
+            <div class="upload_filter_left clearfix">
+                <form name="upload" class="form_upload">
+                    <div class="upload_key">
+
+                        <div class="upload_loader_wrapper">
+                            <svg ng-if="flag" class="spinner" width="23px" height="32px" viewBox="0 0 66 66"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round"
+                                        cx="33" cy="33" r="30"></circle>
+                            </svg>
+                            <span class="linkToBrowse_upload" ng-if="!flag && !complete"></span>
+
+                            <button ng-if='complete' class="submit_uploadFile" type="submit"></button>
+                        </div>
+                        <label class="clearfix" for="browse">
+                            <div id="progress" ng-style="{width: progress + '%'}"></div>
+                            <!------------- اسم فایل ---------------->
+                            <span>آپلود فایل جدید</span>
+                            <input id="browse" type="file" name="file" multiple
+                                   onchange="angular.element(this).scope().uploadedFile(this)"/>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="list_archive_container clearfix">
+
+            <ul class="list_archive clearfix" ng-if="files.length > 0">
+
+
+                <li class="list_archive_item clearfix" ng-repeat="info in files">
+                    <div class="list_archive_preview">
+                        <a class="list_archive_preview_play"></a>
+                        <!-- <video controls class="list_archive_preview_play">
+                            <source src="" type="video/mp4" />
+                            <p>your browser not support</p>
+                        </video> -->
+
+                        <div class="list_archive_title">
+                            <p>{{info.name}}</p>
+                            <p>{{info.date}}</p>
+                            <button class="list_archive_item_link">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <p></p>
+                                <ul class="list_item_actions">
+                                    <li class="list_item_action send_action clearfix" ng-click="sendFile(info.id,0)"><a
+                                            class="clearfix"><span>ارسال</span><i></i></a></li>
+                                    <li class="list_item_action delete_action clearfix"><a><span>حذف</span><i></i></a>
+                                    </li>
+                                </ul>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+</section>

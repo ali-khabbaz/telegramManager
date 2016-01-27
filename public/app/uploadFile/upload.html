@@ -1,0 +1,45 @@
+<div ng-controller="uploadCtrl">
+    <div my-head></div>
+    <div class="im_page_wrap clearfix upload_relative">
+        <div class="im_page_wrap clearfix" ng-class="{im_page_peer_not_selected: !curDialog.peer}">
+            <div class="im_page_split clearfix">
+                <div class="divider_list_wrapper" ng-if="mainView.showDivider">
+                    <ul class="divider_list">
+                        <li ng-click="typeDividerSelect(1)"
+                            ng-class="{active:tab == 1}"><a
+                                class="divider_list_item  video_divider"><span></span></a></li>
+                        <li ng-click="typeDividerSelect(2)"
+                            ng-class="{active:tab == 2}"><a
+                                class="divider_list_item img_divider"><span></span></a></li>
+                        <li ng-click="typeDividerSelect(3)"
+                            ng-class="{active:tab == 3}"><a
+                                class="divider_list_item graphic_divider"><span></span></a></li>
+                        <li ng-click="typeDividerSelect(4)"
+                            ng-class="{active:tab == 4}"><a
+                                class="divider_list_item text_divider"><span></span></a>
+                        </li>
+                        <li ng-click="typeDividerSelect(5)"
+                            ng-class="{active:tab == 5}"><a
+                                class="divider_list_item online_advertise"><span></span></a>
+                        </li>
+                        <!--<li ng-click="typeDividerSelect(6)"-->
+                            <!--ng-class="{active:tab == 6}"><a-->
+                                <!--class="divider_list_item work_report"><span></span></a>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+                <div class="page_upload_container clearfix" ng-if="authenticated">
+                    <div class="tabContainer_uploadPage">
+                        <div ng-if="tab===1" ng-include src = "'app/uploadFile/video/video.html'"></div>
+                        <div ng-if="tab===2" ng-include src = "'app/uploadFile/pic/pic.html'"></div>
+                        <div ng-if="tab===3" ng-include src = "'app/uploadFile/editpic/editpic.html'"></div>
+                        <div ng-if="tab===4" ng-include src = "'app/uploadFile/text/text.html'"></div>
+                        <div ng-if="tab===5" ng-include src = "'app/uploadFile/advertise/advertise.html'"></div>
+                        <!--<div ng-if="tab===6" ng-include src = "'app/uploadFile/workreport/workreport.html'"></div>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

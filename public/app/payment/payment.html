@@ -1,0 +1,25 @@
+<section class="home_page" ng-controller='paymentCtrl as pay'>
+    <header class="header_site clearfix content container">
+        <div class="nav_right">
+            <div class="home_page_logo pull-right"><a>کندر</a></div>
+            <nav class="menu_nav clearfix">
+                <ul>
+                    <li ng-class="{active:news.location =='home'}"><a href="/#home">صفحه اصلی</a></li>
+                    <li><a href="/#chanelManage">مدیریت کانال</a></li>
+                    <li><a href="/#robot">ساخت ربات</a></li>
+                    <li><a href="/#Cooperation">دعوت به همکاری</a></li>
+                    <li><a href="/#question">سوالات متداول</a></li>
+                    <li><a href="/#contactUs">تماس با ما</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="nav_left">
+            <ul class="menu_user">
+                <li><a href="/#page1">ورود</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="container clearfix body_context">
+        <button type="button" data-ng-click="pay.pay()">Pay!</button>
+    </div>
+</section>
