@@ -427,8 +427,8 @@
             vm.text = '';
             vm.creator_channel = [];
             var userId = JSON.parse(mainViewFactory.getUserTelegramToken()).id;
-            angular.forEach(mainViewFactory.getDialogs(), function (dialog){
-                if(AppPeersManager.isChannel(dialog.peerID)){
+            angular.forEach(mainViewFactory.getDialogs(), function (dialog) {
+                if (AppPeersManager.isChannel(dialog.peerID)) {
                     if (dialog.peerData.pFlags.creator) {
                         vm.creator_channel.push({
                             id: dialog.peerID,
@@ -445,7 +445,6 @@
                 });
             }
         }
-
 
 
         function videoCtrl($http, mvf) {

@@ -11,13 +11,10 @@
             vm.login = login;
             vm.register = register;
             vm.authenticated = mainFac.isAuthenticated();
-
             changeRouteIfLoggedIn();
-
             function changeMember() {
                 vm.member = false;
             }
-
             function changeRouteIfLoggedIn() {
                 if (vm.authenticated) {
                     $location.url('/login');

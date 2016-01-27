@@ -85,12 +85,13 @@ if (cluster.isMaster) {
     };
 
     var login_strategy = new local_strategy(strategy_opts, function (username, password, done) {
+        'use strict';
         console.log('----------------------call login passport', username, password);
         /*
          in this part we find the user from DB and return the user object with username and id
          */
         showDb("SELECT userName,ID,regionId FROM users WHERE userName = '" + username + "' AND " +
-            "password = '" + password + "' ").then(function (result) {
+            "password = '" + password + "' AND confirmed = 'Y'").then(function (result) {
             console.log('result is', result);
             if (result.length === 0) {
                 console.log('not user');
@@ -664,7 +665,6 @@ if (cluster.isMaster) {
                         });
                     });
                 });
-
             }
         });
     });
@@ -683,7 +683,6 @@ if (cluster.isMaster) {
             res.send(result);
         });
     });
-
     app.post('/app/paymentCode', function (req, res) {
         console.log('+req.query.amount', req.query, req.body, +req.query.amount);
         var curl = require('curlrequest'),
@@ -705,10 +704,6 @@ if (cluster.isMaster) {
             showDb(query).then(function () {
                 res.send(data);
             });
-            //console.log('-------vahidddddddddddddddd-------', req.query);
-            //insertToDb(req.query);
-            console.log('--------------', err, data, payload.sub);
-            //res.send(data);
         });
     });
     app.post('/app/paymentCheck', function (req, res) {
@@ -728,9 +723,6 @@ if (cluster.isMaster) {
             }
         });
     });
-    app.listen(PORT);
-    console.log('listening on port', PORT);
-
     function doubleCheck(trans_id, id_get) {
         var q = require('q'),
             dfd = q.defer(),
@@ -754,21 +746,8 @@ if (cluster.isMaster) {
         return dfd.promise;
     }
 
-    function insertToDb(user) {
-        var query = '';
-        if (user.panelType === '1') {
-            query = "INSERT INTO users (userName,password,phone,panel_type " +
-                ") VALUES ('" + user.userName + "' , '" + user.pass +
-                "', " + "'" + user.phone + "', " + "'" + user.panelType + "' )";
-        } else if (user.panelType === '2') {
-            query = "INSERT INTO users (userName,password,regionId,phone,panel_type " +
-                ") VALUES ('" + user.userName + "' , '" + user.pass + "', " +
-                "'" + user.regionId + "', " + "'" + user.phone + "', " + "'" + user.panelType + "' )";
-        }
-        showDb(query).then(function () {
-            console.log('>>>>>>>insert OK');
-        });
-    }
+    app.listen(PORT);
+    console.log('listening on port', PORT);
 }
 
 

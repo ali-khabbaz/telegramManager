@@ -12,7 +12,6 @@ define(['app'], function (app) {
 					'/app/page1/page1Ctrl.js'
 				]
 			},
-
 			'/home': {
 				templateUrl: '/app/home/home.html',
 				dependencies: [
@@ -56,7 +55,7 @@ define(['app'], function (app) {
 				dependencies: [
 					'/app/uploadFile/uploadCtrl.js'
 					/*,
-										'/app/uploadFile/advertise/onlinetextDirective.js'*/
+					 '/app/uploadFile/advertise/onlinetextDirective.js'*/
 				]
 			},
 			'/intro': {

@@ -106,7 +106,7 @@
 				}
 				if (ready) {
 					bootReady.boot = false;
-					//angular.bootstrap(document, ['myApp']);
+					angular.bootstrap(document, ['myApp']);
 				}
 			};
 

@@ -25,29 +25,6 @@
         });
         return dfd.promise;
     }
-    /*function showDb(query) {
-        var dfd = q.defer(),
-            res_result = [];
-        console.log('>>>>', query);
-        c.query(query).on('result', function (res) {
-            // `res` is a streams2+ Readable object stream
-            res.on('data', function (row) {
-                res_result.push(row);
-            }).on('row', function (row) {
-                res_result.push(row);
-            }).on('end', function () {
-                console.log('Result set finished');
-            });
-        }).on('error', function (err) {
-            console.log(query,'\n\n\n\n\n\n', err, '\n\n\n\n\n\n');
-            dfd.reject(new Error(err));
-        }).on('end', function () {
-            dfd.resolve(res_result);
-            console.log('No more result sets!');
-        });
-        //c.end();
-        return dfd.promise;
-    }*/
 
     function encryptor(str) {
         console.log('str is', str);
