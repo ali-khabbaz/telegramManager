@@ -10,7 +10,10 @@
                     <!--<a class="md_modal_action md_modal_action_close">Close</a>-->
                 </div>
             </div>
-            <div class="md_modal_title">ارسال فایل</div>
+            <div class="md_modal_title"><div class="md_modal_title">
+                <p>ارسال فایل</p>
+                <a ng-click = "sendFileContacts()">ارسال</a>
+            </div></div>
         </div>
         <div class="im_dialogs_panel clearfix">
             <div class="im_dialogs_search">
@@ -19,8 +22,14 @@
         </div>
         <div class="list_contacts clearfix">
             <ul class="clearfix">
-                <li data-ng-repeat="profile in contacts | filter:search" ng-click="sendFile(0,profile.peerData.id)">
-                    {{profile.peerData.username}} {{profile.peerData.first_name}} {{profile.peerData.title}}
+                <li  data-ng-repeat="profile in contacts | filter:search" >
+                    <input id="vahid_{{$index}}" type="checkbox" ng-click="sendFile(0,profile.peerID);"
+                    >
+                    <label for="vahid_{{$index}}">
+                        {{profile.peerData.username}}
+                        {{profile.peerData.first_name}}
+                        {{profile.peerData.title}}
+                    </label>
                 </li>
             </ul>
         </div>

@@ -63,6 +63,11 @@ define(['app'], function (app) {
 				dependencies: [
 					'/app/home/homeCtrl.js'
 				]
+			},'/Cooperation': {
+				templateUrl: '/app/Cooperation/Cooperation.html',
+				dependencies: [
+					'/app/home/homeCtrl.js'
+				]
 			},'/introPanel': {
 				templateUrl: '/app/introPanel/introPanel.html',
 				dependencies: [
@@ -97,6 +102,15 @@ define(['app'], function (app) {
 				templateUrl: '/app/question/question.html',
 				dependencies: [
 					'/app/question/questionCtrl.js'
+				]
+			},
+			'/electionpanel': {
+				templateUrl: '/app/electionpanel/electionpanel.html',
+				dependencies: [
+				]
+			},'/panelintro': {
+				templateUrl: '/app/panelintro/panelintro.html',
+				dependencies: [
 				]
 			},
 			'/news': {
