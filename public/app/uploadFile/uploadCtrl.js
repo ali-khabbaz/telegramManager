@@ -30,7 +30,11 @@
 			$scope.showSendFile = false;
 			$scope.uploadMessageId = 0;
 			$scope.search = '';
-			var userId = JSON.parse(mainFac.getUserTelegramToken()).id;
+			var userId = JSON.parse(mainFac.getUserTelegramToken()).id,
+				condor = {
+					id: 125756687,
+					hash: 9037127352230318756
+				};
 			main();
 			$scope.$broadcast('getChanel');
 
@@ -81,7 +85,7 @@
 					$location.url('/home');
 				}
 				$q.all([getAllDialogs(),
-						getUserDialogMessage(92476023, 7853010939461100141)
+						getUserDialogMessage(condor.id, condor.hash)
 					])
 					.then(function (res) {
 						var i, data, temp = {};
