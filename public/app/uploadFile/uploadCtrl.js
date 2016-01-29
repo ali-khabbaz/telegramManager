@@ -30,11 +30,16 @@
             $scope.showSendFile = false;
             $scope.uploadMessageId = 0;
             $scope.search = '';
-            var userId = JSON.parse(mainFac.getUserTelegramToken()).id;
-            $scope.regionId = mainFac.getUser().split(',')[1];
+            var userId = JSON.parse(mainFac.getUserTelegramToken()).id,
+                condor = {
+                    id: userId,//125756687,
+                    hash: 9037127352230318756
+                };
             main();
             $scope.$broadcast('getChanel');
+
             function getUserDialogMessage(userId, accessHash) {
+                console.log('getUserDialogMessage----');
                 var dfd = $q.defer();
                 $scope.peerHistory = {};
                 $scope.peerHistory.messages = [];
@@ -57,7 +62,7 @@
                             //peerHistory.ids.unshift(id);
                         });
                         /*ali :93893642, access_hash : 7853010939461100141 */
-                        //console.log('conversations----11111', peerHistory);
+                        ////console.log('conversations----11111', peerHistory);
                         AppMessagesManager.getHistory({
                                 _: 'inputPeerUser',
                                 'user_id': userId,
@@ -68,7 +73,7 @@
                                     peerHistory.messages.unshift(AppMessagesManager.wrapForHistory(id));
                                     //peerHistory.ids.unshift(id);
                                 });
-                                //console.log('conversations----222222', peerHistory);
+                                ////console.log('conversations----222222', peerHistory);
                                 dfd.resolve(peerHistory);
                             });
                     });
@@ -81,12 +86,14 @@
                     $location.url('/home');
                 }
                 $q.all([getAllDialogs(),
-                        getUserDialogMessage(92476023, 7853010939461100141)])
+                        getUserDialogMessage(condor.id, condor.hash)
+                    ])
                     .then(function (res) {
+
                         var i, data, temp = {};
-                        $scope.files = [];///movie
+                        $scope.files = []; ///movie
                         $scope.images = [];
-                        $scope.contacts = [];//res[0];
+                        $scope.contacts = []; //res[0];
                         for (var j = 0; j < res[0].length; j++) {
                             if (res[0][j].peerData.title) {
                                 $scope.contacts.push(res[0][j]);
@@ -97,19 +104,22 @@
                             }
 
                         }
-                        console.log('contactssss:', $scope.contacts);
+                        //console.log('contactssss:', $scope.contacts);
                         data = res[1].messages;
                         for (i = 0; i < data.length; i++) {
                             if (!data[i].message) {
                                 temp = {};
                                 if (data[i].media.document) {
-                                    //console.log('temp-----------', data[i].media.document['file_name']);
+                                    ////console.log('temp-----------', data[i].media.document['file_name']);
                                     temp.id = data[i].id;
                                     temp.date = data[i].date;
                                     temp.name = data[i].media.document['file_name'];
                                     temp.size = data[i].media.document.size;
                                     temp.id2nd = data[i].media.document.id;
                                     temp.type = data[i].media.document['mime_type'].split('/')[0];
+                                    if (data[i].media.views) {
+                                        temp.views = data[i].media.views;
+                                    }
                                     if (temp.type == 'image') {
                                         $scope.images.push(temp);
                                     } else if (temp.type == 'video') {
@@ -118,8 +128,8 @@
                                 }
                             }
                         }
-                        console.log('files--------', $scope.files);
-                        console.log('contacts--------', $scope.contacts);
+                        //console.log('files--------', $scope.files);
+                        //console.log('contacts--------', $scope.contacts);
                     });
             }
 
@@ -127,7 +137,7 @@
 
                 fileObject.lastModified = new Date();
                 fileObject.webkitRelativePath = '';
-                console.log('file recieved', fileObject[0]);
+                //console.log('file recieved', fileObject[0]);
                 //92476023    93893642///ali ...//36282101 hosein   ///iman81412715
                 AppMessagesManager.sendFile(92476023, fileObject[0], {
                     replyToMsgID: undefined,
@@ -136,7 +146,7 @@
                 $scope.$watch(function () {
                     return MtpApiFileManager.getProgress()
                 }, function (newVal, oldVal) {
-                    console.log('>>>>>', newVal);
+                    //console.log('>>>>>', newVal);
                     if (newVal != oldVal) {
                         $scope.progress = newVal * 100;
                         if ($scope.progress > 90) {
@@ -224,8 +234,8 @@
                         return file1.lastModified - file2.lastModified;
                     });
                 }
-                console.log('----------------- P H O T O ----------------', 94030292,
-                    '%%%%%%%%%%%%%', newVal, '%%%%%%%%%%%%', options);
+                //console.log('----------------- P H O T O ----------------', 94030292,
+                //'%%%%%%%%%%%%%', newVal, '%%%%%%%%%%%%', options);
                 for (var i = 0; i < newVal.length; i++) {
                     AppMessagesManager.sendFile(94030292, newVal[i], options);
                     $scope.$broadcast('ui_message_send');
@@ -255,7 +265,7 @@
 
             function sendMessage(e) {
                 $scope.$broadcast('ui_message_before_send');
-                console.log('----------------- P H O T O ------1----------', e);
+                //console.log('----------------- P H O T O ------1----------', e);
 
                 $timeout(function () {
                     var text = $scope.draftMessage.text;
@@ -302,38 +312,38 @@
 
             function getVideos() {
                 $scope.videos = [];
-                var url = mainFac.apiUrl + 'app/videos/',
+                var url = mainFac.getApiUrl() + 'app/videos/',
                     i;
                 $http.post(url)
                     .success(function (data) {
                         for (i = 0; i < data.length; i++) {
                             $scope.videos.push({});
                             $scope.videos[i].trustAddress = $sce.trustAsResourceUrl('upload/' + data[i].name);
-                            $scope.videos[i].address = mainFac.apiUrl + '/upload/' + data[i].name;
+                            $scope.videos[i].address = mainFac.getApiUrl() + '/upload/' + data[i].name;
                         }
-                        console.log($scope.videos);
+                        //console.log($scope.videos);
                     })
                     .error(function (data) {
-                        console.log(data);
+                        //console.log(data);
                     });
             }
 
             function getImages() {
 
                 $scope.images = [];
-                var url = mainFac.apiUrl + 'app/images/',
+                var url = mainFac.getApiUrl() + 'app/images/',
                     i;
                 $http.post(url)
                     .success(function (data) {
                         for (i = 0; i < data.length; i++) {
                             $scope.images.push({});
                             //$scope.images[i].trustAddress = $sce.trustAsResourceUrl('upload/' + data[i].name);
-                            $scope.images[i].address = mainFac.apiUrl + '/upload/' + data[i].name;
+                            $scope.images[i].address = mainFac.getApiUrl() + '/upload/' + data[i].name;
                         }
-                        console.log($scope.images);
+                        //console.log($scope.images);
                     })
                     .error(function (data) {
-                        console.log(data);
+                        //console.log(data);
                     });
             }
 
@@ -370,16 +380,15 @@
                     //mahmod mzfr 178589339 .//morteza :101777442      vahid///92476023
                     ////poorya 111035748   94030292
                     //console.log('messageId', AppPeersManager.isChannel(1023510054));
-                   /* for (var i = 0; i < 2; i++) {
-                        AppMessagesManager.forwardMessages(sendContactId, [$scope.uploadMessageId]);
-                        //AppMessagesManager.forwardMessages(arrayOfContactId[i], [$scope.uploadMessageId]);
-                    }
-                    //$scope.showSendFile = false;*/
+                    /* for (var i = 0; i < 2; i++) {
+                     AppMessagesManager.forwardMessages(sendContactId, [$scope.uploadMessageId]);
+                     //AppMessagesManager.forwardMessages(arrayOfContactId[i], [$scope.uploadMessageId]);
+                     }
+                     //$scope.showSendFile = false;*/
                 }
             };
 
             $scope.sendFileContacts = sendFileContacts;
-
             function sendFileContacts() {
                 for (var i = 0; i < $scope.sendContactId.length; i++) {
                     console.log('===========', $scope.sendContactId[i]);
@@ -406,13 +415,15 @@
             $scope.addFile = function () {
                 uploadfile($scope.add_files,
                     function (res) {
-                        console.log('ploaded', res);
+                        //console.log('ploaded', res);
                     },
                     function (err) {
-                        console.log('error', err);
+                        //console.log('error', err);
                     });
             };
+
             function getAllDialogs() {
+                console.log('getAllDialogs----');
                 var dfd = $q.defer(),
                     i;
                 getDialogs(0).then(function (result) {
@@ -420,7 +431,7 @@
                         result[i].peerData = AppPeersManager.getPeer(result[i].peerID);
                     }
                     mainFac.setDialogs(result);
-                    //console.log('dialogs------', result);
+                    ////console.log('dialogs------', result);
                     dfd.resolve(result);
                 });
                 return dfd.promise;
@@ -430,7 +441,8 @@
                 var dfd = $q.defer(),
                     i, temp;
                 AppMessagesManager.getConversations('', offsetIndex, 500).then(function (result) {
-                    //console.log('conversationnnnnssnsn', result);
+                    ////console.log('conversationnnnnssnsn', result);
+
                     if (result.dialogs.length) {
                         offsetIndex = result.dialogs[result.dialogs.length - 1].index;
                         temp = mainFac.getDialogs();
@@ -473,7 +485,8 @@
                 }
             });
             vm.selected_chanel = vm.creator_channel[0];
-            function sendText() {//1003313974    //-1023510054
+
+            function sendText() { //1003313974    //-1023510054
                 AppMessagesManager.sendText(vm.selected_chanel.id, vm.text, {
                     replyToMsgID: undefined,
                     isMedia: false

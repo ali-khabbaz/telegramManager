@@ -1577,14 +1577,14 @@ angular.module('myApp.directives', ['myApp.filters'])
             if (richTextarea) {
                 $(richTextarea).on('keydown keyup', updateHeight);
             }
-            console.log('%%%%%%%%%%%%%%%%%^^^^^^^^^^^', fileSelects);
+            //console.log('%%%%%%%%%%%%%%%%%^^^^^^^^^^^', fileSelects);
             fileSelects.on('change', function () {
                 var self = this;
                 $scope.$apply(function () {
                     $scope.draftMessage.files = Array.prototype.slice.call(self.files);
                     $scope.draftMessage.isMedia = $(self).hasClass('im_media_attach_input') || Config.Mobile;
-                    console.log('--########--fileSelects.on-----', self.files, Array.prototype.slice.call(self.files),
-                        $(self).hasClass('im_media_attach_input'));
+                    /*console.log('--########--fileSelects.on-----', self.files, Array.prototype.slice.call(self.files),
+                        $(self).hasClass('im_media_attach_input'));*/
                     setTimeout(function () {
                         try {
                             self.value = '';
@@ -1717,7 +1717,7 @@ angular.module('myApp.directives', ['myApp.filters'])
                 ErrorService.confirm({
                     type: 'FILE_CLIPBOARD_PASTE'
                 }).then(function () {
-                    console.log('--%%%%%%%%%%%%%%%%%-onFilePaste---', blob);
+                    //console.log('--%%%%%%%%%%%%%%%%%-onFilePaste---', blob);
                     $scope.draftMessage.files = [blob];
                     $scope.draftMessage.isMedia = true;
                 });
@@ -1748,7 +1748,7 @@ angular.module('myApp.directives', ['myApp.filters'])
             }
 
             function onDragDropEvent(e) {
-                console.log('--%%%%%%%%%%%%%%%%$$$$$$$$$$$$$$$%-onDragDropEvent---', e);
+                //console.log('--%%%%%%%%%%%%%%%%$$$$$$$$$$$$$$$%-onDragDropEvent---', e);
                 var dragStateChanged = false;
                 if (!dragStarted || dragStarted == 1) {
                     dragStarted = checkDragEvent(e) ? 2 : 1;
@@ -3156,7 +3156,7 @@ angular.module('myApp.directives', ['myApp.filters'])
                     return cancelEvent(e);
                 }
 
-                // console.log(e.type, e, lastMinPageX, e.pageX, offsetX);
+            // console.log(e.type, e, lastMinPageX, e.pageX, offsetX);
                 lastUpdValue = minValue + offsetX / width * (maxValue - minValue);
                 if (sliderCallback) {
                     $scope.$eval(sliderCallback, {

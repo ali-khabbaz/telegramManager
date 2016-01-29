@@ -85,13 +85,12 @@ if (cluster.isMaster) {
     };
 
     var login_strategy = new local_strategy(strategy_opts, function (username, password, done) {
-        'use strict';
         console.log('----------------------call login passport', username, password);
         /*
          in this part we find the user from DB and return the user object with username and id
          */
         showDb("SELECT userName,ID,regionId FROM users WHERE userName = '" + username + "' AND " +
-            "password = '" + password + "' AND confirmed = 'Y'").then(function (result) {
+            "password = '" + password + "' ").then(function (result) {
             console.log('result is', result);
             if (result.length === 0) {
                 console.log('not user');
@@ -196,12 +195,10 @@ if (cluster.isMaster) {
         });
     });
     app.post('/app/login', passport.authenticate('local-login'), function (req, res) {
-        console.log('req-----------', req.user);
         var token = createToken(req.user, req);
         res.send({
             user: req.user.userName,
             regionId: req.user.regionId,
-            id: req.user.id,
             token: token
         });
     });
@@ -461,6 +458,22 @@ if (cluster.isMaster) {
         });
     });
     //////iman servicesssss///////////////////////
+    ////// app.post('/app/status', function (req, res) {
+    //////      console.log('Statusssssss');
+    //////      res.send({
+    ////// //////          'status': 0,
+    //////          'name':'????? ??'
+    //////      });
+    //////  });
+    /*    app.post('/app/latary', function (req, res) {
+     var query = "INSERT INTO latary (telegramID, userName ,answer" +
+     ") VALUES ('" + req.body.telegramID + "', " +
+     "'" + req.body.userName + "', " +
+     "'" + req.body.answer + "' )";
+     showDb(query).then(function (result) {
+     console.log('-----latary insert OK------');
+     });
+     });*/
     app.post('/app/consituency', function (req, res) {
         console.log('consituency', req.body);
         var search_person = "select * from people where telegramID =" + req.body.telegramID;
@@ -624,7 +637,7 @@ if (cluster.isMaster) {
                         showDb(q2).then(function () {
                             console.log('select to version');
                         })
-                    }else{
+                    } else {
                         var update_version = "update advertise_version set version = version+1 where regionId ='" + req.query.regionId + "'";
                         showDb(update_version).then(function () {
                             console.log('update to version');
@@ -730,7 +743,6 @@ if (cluster.isMaster) {
         });
         return dfd.promise;
     }
-
     app.listen(PORT);
     console.log('listening on port', PORT);
 }

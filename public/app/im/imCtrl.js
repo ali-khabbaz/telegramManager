@@ -12,11 +12,9 @@
         app.controller('SettingsModalController', SettingsModalController);
         app.controller('UserpicModalController', UserpicModalController);
         app.controller('DocumentModalController', DocumentModalController);
-        app.controller('AppLangSelectController', AppLangSelectController);
-        app.controller('UsernameEditModalController',UsernameEditModalController);
         DocumentModalController.inject = ['$scope', '$rootScope', '$modalInstance', 'PeersSelectService', 'AppMessagesManager', 'AppDocsManager', 'AppPeersManager', 'ErrorService'];
         UserpicModalController.inject = ['$q', '$scope', '$rootScope', '$modalInstance', 'MtpApiManager', 'AppPhotosManager', 'AppUsersManager', 'AppPeersManager', 'AppMessagesManager', 'ApiUpdatesManager', 'PeersSelectService', 'ErrorService'];
-        SettingsModalController.inject = ['$location', '$rootScope', '$scope', '$timeout', '$modal', 'AppUsersManager', 'AppChatsManager', 'AppPhotosManager', 'MtpApiManager', 'Storage', 'NotificationsManager', 'MtpApiFileManager', 'PasswordManager', 'ApiUpdatesManager', 'ChangelogNotifyService', 'LayoutSwitchService', 'AppRuntimeManager', 'ErrorService', '_'];
+        SettingsModalController.inject = ['mainViewFactory', '$location', '$rootScope', '$scope', '$timeout', '$modal', 'AppUsersManager', 'AppChatsManager', 'AppPhotosManager', 'MtpApiManager', 'Storage', 'NotificationsManager', 'MtpApiFileManager', 'PasswordManager', 'ApiUpdatesManager', 'ChangelogNotifyService', 'LayoutSwitchService', 'AppRuntimeManager', 'ErrorService', '_'];
         imCtrl.$inject = ['$scope', '$location', '$q', '$timeout', '$routeParams',
             'MtpApiManager', 'AppUsersManager', 'AppChatsManager', 'AppMessagesManager',
             'AppProfileManager', 'AppPeersManager', 'PhonebookContactsService', 'ErrorService',
@@ -25,11 +23,8 @@
             'LayoutSwitchService', 'LocationParamsService', 'AppStickersManager',
             'ApiUpdatesManager', 'PeersSelectService', 'IdleManager', 'StatusManager',
             'NotificationsManager', 'Storage', 'AppDocsManager', 'MtpApiFileManager',
-            'RichTextProcessor' /*, '$modalInstance'*/, 'AppPhotosManager', 'AppWebPagesManager',
-            'mainViewFactory'
+            'RichTextProcessor' /*, '$modalInstance'*/, 'AppPhotosManager', 'AppWebPagesManager', 'mainViewFactory'
         ];
-        AppLangSelectController.$inject = ['$scope', '_', 'Storage', 'ErrorService', 'AppRuntimeManager'];
-        UsernameEditModalController.$inject = ['$scope', '$modalInstance', 'AppUsersManager', 'MtpApiManager'];
         ContactsModalController.$inject = ['$scope', '$timeout',
             'MtpApiManager', 'AppUsersManager',
             '$modalInstance'
@@ -86,7 +81,7 @@
 
 
                 $scope.typeDialogSelected = function (type) {
-                    console.log(">>>>", type);
+                    //console.log(">>>>", type);
                     AppMessagesManager.setDialogType(type);
                     $scope.type = type;
                     $scope.$broadcast('typeDialogSelected', {
@@ -152,7 +147,7 @@
                 };
 
                 $scope.openSettings = function () {
-                    console.log('-------openSettings--------');
+                    //console.log('-------openSettings--------');
                     $modal.open({
                         templateUrl: templateUrl('settings_modal'),
                         controller: 'SettingsModalController',
@@ -163,7 +158,7 @@
 
 
                 $scope.openFaq = function () {
-                    console.log('------openFaq---------');
+                    //console.log('------openFaq---------');
                     var url = 'https://telegram.org/faq';
                     switch (Config.I18n.locale) {
                         case 'es-es':
@@ -187,7 +182,7 @@
                 };
 
                 $scope.openContacts = function () {
-                    console.log('-------openContacts--------');
+                    //console.log('-------openContacts--------');
                     ContactsSelectService.selectContact().then(function (userID) {
                         $scope.dialogSelect(AppUsersManager.getUserString(userID));
                     });
@@ -217,7 +212,7 @@
                 };
 
                 $scope.importContact = function () {
-                    console.log('-------importContact--------');
+                    //console.log('-------importContact--------');
                     AppUsersManager.openImportContact().then(function (foundContact) {
                         if (foundContact) {
                             $rootScope.$broadcast('history_focus', {
@@ -228,20 +223,20 @@
                 };
 
                 $scope.searchClear = function () {
-                    console.log('------searchClear---------');
+                    //console.log('------searchClear---------');
                     $scope.search.query = '';
                     $scope.$broadcast('search_clear');
                 };
 
                 $scope.dialogSelect = function (peerString, messageID) {
 
-                    console.log('-------dialogSelect--------', peerString);
+                    //console.log('-------dialogSelect--------', peerString);
                     var params = {
                         peerString: peerString
                     };
 
                     if (messageID) {
-                        console.log('-------dialogSelect--------', peerString, "-----", messageID);
+                        //console.log('-------dialogSelect--------', peerString, "-----", messageID);
                         params.messageID = messageID;
                     } else if ($scope.search.query) {
                         $scope.searchClear();
@@ -250,7 +245,7 @@
                 };
 
                 $scope.logOut = function () {
-                    console.log('--------logOut-------');
+                    //console.log('--------logOut-------');
                     ErrorService.confirm({
                         type: 'LOGOUT'
                     }).then(function () {
@@ -264,12 +259,12 @@
                 };
 
                 $scope.openChangelog = function () {
-                    console.log('-------openChangelog--------');
+                    //console.log('-------openChangelog--------');
                     ChangelogNotifyService.showChangelog(false);
                 }
 
                 $scope.showPeerInfo = function () {
-                    console.log('-------showPeerInfo--------');
+                    //console.log('-------showPeerInfo--------');
                     if ($scope.curDialog.peerID > 0) {
                         AppUsersManager.openUser($scope.curDialog.peerID)
                     } else if ($scope.curDialog.peerID < 0) {
@@ -278,23 +273,23 @@
                 };
 
                 $scope.toggleEdit = function () {
-                    console.log('-------toggleEdit--------');
+                    //console.log('-------toggleEdit--------');
                     $scope.$broadcast('history_edit_toggle');
                 };
                 $scope.selectedFlush = function () {
-                    console.log('----------selectedFlush-----');
+                    //console.log('----------selectedFlush-----');
                     $scope.$broadcast('history_edit_flush');
                 };
                 $scope.toggleMedia = function (mediaType) {
-                    console.log('--------toggleMedia-------', mediaType);
+                    //console.log('--------toggleMedia-------', mediaType);
                     $scope.$broadcast('history_media_toggle', mediaType);
                 };
                 $scope.returnToRecent = function () {
-                    console.log('-----------returnToRecent----');
+                    //console.log('-----------returnToRecent----');
                     $scope.$broadcast('history_return_recent');
                 };
                 $scope.toggleSearch = function () {
-                    console.log('---------toggleSearch------');
+                    //console.log('---------toggleSearch------');
                     $scope.$broadcast('dialogs_search_toggle');
                 };
 
@@ -303,7 +298,7 @@
                 var lastSearch = false;
 
                 function updateCurDialog() {
-                    console.log('-----updateCurDialog--------', $routeParams.p);
+                    //console.log('-----updateCurDialog--------', $routeParams.p);
                     if ($routeParams.q) {
                         if ($routeParams.q !== lastSearch) {
                             $scope.search.query = lastSearch = $routeParams.q;
@@ -507,7 +502,7 @@
                     if (diff > 0) {
                         $scope.peerHistories.splice(maxLen - 1, diff);
                     }
-                    console.log('----------history-------', history);
+                    //console.log('----------history-------', history);
                     return history;
                 }
 
@@ -741,7 +736,7 @@
                 };
 
                 function loadHistory(forceRecent) {
-                    console.log('---loadHistory----', forceRecent);
+                    //console.log('---loadHistory----', forceRecent);
                     $scope.historyState.missedCount = 0;
 
                     hasMore = false;
@@ -783,7 +778,7 @@
 
 
                     $scope.state.mayBeHasMore = true;
-                    console.log(dT(), 'start load history', $scope.curDialog);
+                    //console.log(dT(), 'start load history', $scope.curDialog);
                     getMessagesPromise.then(function (historyResult) {
                         if (curJump != jump) return;
                         // console.log(dT(), 'history loaded', angular.copy(historyResult));
@@ -1460,7 +1455,7 @@
                 });
 
                 $scope.$on('dialog_unread', function (e, dialog) {
-                    console.log('>>>>>>>>>$scope.dialogs>>>>>>', dialog);
+                    //console.log('>>>>>>>>>$scope.dialogs>>>>>>', dialog);
                     angular.forEach($scope.dialogs, function (curDialog) {
                         if (curDialog.peerID == dialog.peerID) {
                             curDialog.unreadCount = dialog.count;
@@ -1611,7 +1606,7 @@
                 var searchTimeoutPromise;
 
                 function getDialogs(force) {
-                    console.log('----------getDialogs------------', force);
+                    //console.log('----------getDialogs------------', force);
                     var curJump = ++jump;
 
                     $timeout.cancel(searchTimeoutPromise);
@@ -1656,13 +1651,13 @@
                         if (curJump != jump) {
                             return $q.reject();
                         }
-                        console.log('getConversations-------', result);
+                        //console.log('getConversations-------', result);
                         return result;
                     });
                 };
                 $scope.$on('typeDialogSelected', function (e, type) {
                     $scope.dialogs = [];
-                    console.log('-----------loadDialogs-----------');
+                    //console.log('-----------loadDialogs-----------');
                     offsetIndex = 0;
                     maxID = 0;
                     hasMore = false;
@@ -1671,8 +1666,8 @@
                         contactsShown = false;
                     }
                     getDialogs().then(function (dialogsResult) {
-                        console.log('-----call--------getDialogs---------', dialogsResult);
-                        console.log('------$scope.dialogs-------------', $scope.dialogs);
+                        //console.log('-----call--------getDialogs---------', dialogsResult);
+                        //console.log('------$scope.dialogs-------------', $scope.dialogs);
                         if (!searchMessages) {
                             $scope.dialogs = [];
                             $scope.contacts = [];
@@ -1691,7 +1686,7 @@
                                 }
                                 var wrappedDialog =
                                     AppMessagesManager.wrapForDialog(dialog.top_message, dialog);
-                                console.log('>>>>ss>>>', wrappedDialog);
+                                //console.log('>>>>ss>>>', wrappedDialog);
                                 if (!searchMessages) {
                                     peersInDialogs[dialog.peerID] = true;
                                 }
@@ -1727,7 +1722,7 @@
                             showMoreDialogs();
                         }
                         AppMessagesManager.setAllMyDialogs($scope.dialogs);
-                        console.log('------$scope.dialogs-----2nd-----', $scope.dialogs);
+                        //console.log('------$scope.dialogs-----2nd-----', $scope.dialogs);
 
                     });
                 });
@@ -1735,7 +1730,7 @@
                 function loadDialogs(force) {
                     var t = AppMessagesManager.getDialogType();
                     $scope.dialogs = [];
-                    console.log('-----------loadDialogs-----------', t);
+                    //console.log('-----------loadDialogs-----------', t);
                     offsetIndex = 0;
                     maxID = 0;
                     hasMore = false;
@@ -1745,8 +1740,8 @@
                     }
 
                     getDialogs(force).then(function (dialogsResult) {
-                        console.log('-----call--------getDialogs---------', dialogsResult);
-                        console.log('------$scope.dialogs-------------', $scope.dialogs);
+                        //console.log('-----call--------getDialogs---------', dialogsResult);
+                        //console.log('------$scope.dialogs-------------', $scope.dialogs);
                         if (!searchMessages) {
                             $scope.dialogs = [];
                             $scope.contacts = [];
@@ -1765,7 +1760,7 @@
                                 }
                                 var wrappedDialog =
                                     AppMessagesManager.wrapForDialog(dialog.top_message, dialog);
-                                console.log('>>>>ss>>>', dialog);
+                                //console.log('>>>>ss>>>', dialog);
                                 if (!searchMessages) {
                                     peersInDialogs[dialog.peerID] = true;
                                 }
@@ -1801,13 +1796,13 @@
                             showMoreDialogs();
                         }
                         AppMessagesManager.setAllMyDialogs($scope.dialogs);
-                        console.log('------$scope.dialogs-----2nd-----', $scope.dialogs);
+                        //console.log('------$scope.dialogs-----2nd-----', $scope.dialogs);
                     });
                 }
 
                 function showMoreDialogs() {
                     var t = AppMessagesManager.getDialogType();
-                    console.log('----------showMoreDialogs------------');
+                    //console.log('----------showMoreDialogs------------');
                     if (contactsShown && (!hasMore || !offsetIndex && !maxID)) {
                         return;
                     }
@@ -1818,11 +1813,11 @@
                         return;
                     }
                     getDialogs().then(function (dialogsResult) {
-                        console.log('-----call--------getDialogs---22222222222------', dialogsResult);
+                        //console.log('-----call--------getDialogs---22222222222------', dialogsResult);
                         if (dialogsResult.dialogs.length) {
                             var dialogsList = [];
                             dialogsList = searchMessages ? $scope.foundMessages : $scope.dialogs;
-                            console.log('--------%%%%%%-------', $scope.dialogs);
+                            //console.log('--------%%%%%%-------', $scope.dialogs);
 
                             angular.forEach(dialogsResult.dialogs, function (dialog) {
                                 if ($scope.canSend &&
@@ -1856,7 +1851,7 @@
                 };
 
                 function showMoreConversations() {
-                    console.log('-----------showMoreConversations-----------');
+                    //console.log('-----------showMoreConversations-----------');
                     contactsShown = true;
 
                     var curJump = ++contactsJump;
@@ -1964,7 +1959,7 @@
 
                 function sendMessage(e) {
                     $scope.$broadcast('ui_message_before_send');
-                    console.log('----------------- P H O T O ------1----------', e);
+                    //console.log('----------------- P H O T O ------1----------', e);
 
                     $timeout(function () {
                         var text = $scope.draftMessage.text;
@@ -2285,7 +2280,7 @@
                             return file1.lastModified - file2.lastModified;
                         });
                     }
-                    console.log('----------------- P H O T O ----------------', $scope.curDialog.peerID, '%%%%%%%%%%%%%', newVal, '%%%%%%%%%%%%', options);
+                    //console.log('----------------- P H O T O ----------------', $scope.curDialog.peerID, '%%%%%%%%%%%%%', newVal, '%%%%%%%%%%%%', options);
                     for (var i = 0; i < newVal.length; i++) {
                         AppMessagesManager.sendFile($scope.curDialog.peerID, newVal[i], options);
                         $scope.$broadcast('ui_message_send');
@@ -2921,7 +2916,7 @@
 
                 var curJump = ++contactsJump;
                 AppUsersManager.getContacts($scope.search.query).then(function (contactsList) {
-                    console.log('>>>>>>>>', contactsList);
+                    //console.log('>>>>>>>>', contactsList);
                     if (curJump != contactsJump) return;
                     $scope.contacts = [];
                     angular.forEach(contactsList, function (userID) {
@@ -3512,7 +3507,7 @@
 
         }
 
-        function SettingsModalController($location, $rootScope, $scope, $timeout, $modal, AppUsersManager, AppChatsManager, AppPhotosManager, MtpApiManager, Storage, NotificationsManager, MtpApiFileManager, PasswordManager, ApiUpdatesManager, ChangelogNotifyService, LayoutSwitchService, AppRuntimeManager, ErrorService, _) {
+        function SettingsModalController(mvf, $location, $rootScope, $scope, $timeout, $modal, AppUsersManager, AppChatsManager, AppPhotosManager, MtpApiManager, Storage, NotificationsManager, MtpApiFileManager, PasswordManager, ApiUpdatesManager, ChangelogNotifyService, LayoutSwitchService, AppRuntimeManager, ErrorService, _) {
 
             $scope.profile = {};
             $scope.photo = {};
@@ -4057,95 +4052,5 @@
                 }
             });
         }
-
-        function AppLangSelectController($scope, _, Storage, ErrorService, AppRuntimeManager) {
-            $scope.supportedLocales = Config.I18n.supported;
-            $scope.langNames = Config.I18n.languages;
-            $scope.curLocale = Config.I18n.locale;
-            $scope.form = {
-                locale: Config.I18n.locale
-            };
-
-            $scope.localeSelect = function localeSelect(newLocale) {
-                newLocale = newLocale || $scope.form.locale;
-                if ($scope.curLocale !== newLocale) {
-                    ErrorService.confirm({
-                        type: 'APPLY_LANG_WITH_RELOAD'
-                    }).then(function () {
-                        Storage.set({
-                            i18n_locale: newLocale
-                        }).then(function () {
-                            AppRuntimeManager.reload();
-                        });
-                    }, function () {
-                        $scope.form.locale = $scope.curLocale;
-                    });
-                }
-            };
-        }
-         function UsernameEditModalController ($scope, $modalInstance, AppUsersManager, MtpApiManager) {
-
-            $scope.profile = {};
-            $scope.error = {};
-
-            MtpApiManager.getUserID().then(function (id) {
-                $scope.profile = angular.copy(AppUsersManager.getUser(id));
-            });
-
-            $scope.updateUsername = function () {
-                $scope.profile.updating = true;
-
-                MtpApiManager.invokeApi('account.updateUsername', {
-                    username: $scope.profile.username || ''
-                }).then(function (user) {
-                    $scope.checked = {};
-                    AppUsersManager.saveApiUser(user);
-                    $modalInstance.close();
-                }, function (error) {
-                    if (error.type == 'USERNAME_NOT_MODIFIED') {
-                        error.handled = true;
-                        $modalInstance.close();
-                    }
-                })['finally'](function () {
-                    delete $scope.profile.updating;
-                });
-            }
-
-            $scope.$watch('profile.username', function (newVal) {
-                if (!newVal || !newVal.length) {
-                    $scope.checked = {};
-                    return;
-                }
-                MtpApiManager.invokeApi('account.checkUsername', {
-                    username: newVal || ''
-                }).then(function (valid) {
-                    if ($scope.profile.username != newVal) {
-                        return;
-                    }
-                    if (valid) {
-                        $scope.checked = {
-                            success: true
-                        };
-                    } else {
-                        $scope.checked = {
-                            error: true
-                        };
-                    }
-                }, function (error) {
-                    if ($scope.profile.username != newVal) {
-                        return;
-                    }
-                    switch (error.type) {
-                        case 'USERNAME_INVALID':
-                            $scope.checked = {
-                                error: true
-                            };
-                            error.handled = true;
-                            break;
-                    }
-                });
-            })
-        }
-
     });
 }());
