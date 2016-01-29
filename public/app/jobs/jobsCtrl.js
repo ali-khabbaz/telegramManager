@@ -23,7 +23,7 @@
 			getJobs();
 
 			function getJobs() {
-				var url = mainFac.apiUrl + 'app/jobs';
+				var url = mainFac.getApiUrl() + 'app/jobs';
 				$http.post(url).success(function (res) {
 					vm.jobs_data = res;
 				}).error(function (err) {

@@ -24,7 +24,7 @@
 				} else {
 					$http({
 						method: 'POST',
-						url: mainFac.apiUrl + 'app/order',
+						url: mainFac.getApiUrl() + 'app/order',
 						params: person
 					}).success(function (res) {
 						if (res.status == 'ok') {

@@ -18,7 +18,7 @@
 			getSections();
 
 			function getVideo() {
-				var url = mainFac.apiUrl + "app/video";
+				var url = mainFac.getApiUrl() + "app/video";
 				$http.post(url, {
 					"article_id": par.art_id,
 					"section_id": par.sec_id,
@@ -38,7 +38,7 @@
 			}
 
 			function getSecList() {
-				var url = mainFac.apiUrl + "app/sec_list";
+				var url = mainFac.getApiUrl() + "app/sec_list";
 				$http.post(url, {
 					"article_id": par.art_id,
 					"section_id": par.sec_id
@@ -52,7 +52,7 @@
 			}
 
 			function getSections() {
-				var url = mainFac.apiUrl + "app/sections";
+				var url = mainFac.getApiUrl() + "app/sections";
 				$http.post(url, {
 					"article_id": par.art_id,
 					"section_id": par.sec_id

@@ -22,7 +22,7 @@ angular.module('myApp.services', ['myApp.i18n', 'izhukov.utils'])
             contactsIndex = SearchIndexManager.createIndex(),
             myID,
             serverTimeOffset = 0;
-        console.log('>>>contactsList>>>',fillContacts());
+        //console.log('>>>contactsList>>>',fillContacts());
         Storage.get('server_time_offset').then(function (to) {
             if (to) {
                 serverTimeOffset = to;
@@ -2690,7 +2690,7 @@ angular.module('myApp.services', ['myApp.i18n', 'izhukov.utils'])
                     saveUpdate(update);
                 });
 
-                // console.log(dT(), 'applying', differenceResult.new_messages.length, 'new messages');
+            // console.log(dT(), 'applying', differenceResult.new_messages.length, 'new messages');
                 angular.forEach(differenceResult.new_messages, function (apiMessage) {
                     saveUpdate({
                         _: 'updateNewMessage',

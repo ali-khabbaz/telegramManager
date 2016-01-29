@@ -11,7 +11,7 @@
 			getArticleList();
 
 			function getArticleList() {
-				var url = mainFac.apiUrl + "app/articleList";
+				var url = mainFac.getApiUrl() + "app/articleList";
 				$http.post(url).success(function (res) {
 					if (res.err) {
 						console.log('err', res.err);

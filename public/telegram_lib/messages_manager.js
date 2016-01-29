@@ -1417,7 +1417,7 @@ angular.module('myApp.services')
 
 				uploadPromise.then(function (inputFile) {
 					inputFile.name = apiFileName;
-					console.log('------photo------inputFile.name---------', inputFile.name, attachType);
+					//console.log('------photo------inputFile.name---------', inputFile.name, attachType);
 					uploaded = true;
 					var inputMedia;
 					switch (attachType) {
@@ -1474,8 +1474,8 @@ angular.module('myApp.services')
 						random_id: randomID,
 						reply_to_msg_id: getMessageLocalID(replyToMsgID)
 					}).then(function (updates) {
-						console.log('------photo------sendMedia---------', flags, inputPeer, inputMedia, randomID,
-							getMessageLocalID(replyToMsgID));
+						/*console.log('------photo------sendMedia---------', flags, inputPeer, inputMedia, randomID,
+							getMessageLocalID(replyToMsgID));*/
 						ApiUpdatesManager.processUpdateMessage(updates);
 					}, function (error) {
 						if (attachType == 'photo' &&
@@ -2107,7 +2107,7 @@ angular.module('myApp.services')
 				AppUsersManager.saveApiUsers(getMessagesResult.users);
 				AppChatsManager.saveApiChats(getMessagesResult.chats);
 				saveMessages(getMessagesResult.messages);
-				console.log('>>>getMessagesResult.messages=>>>>', getMessagesResult.messages);
+				//console.log('>>>getMessagesResult.messages=>>>>', getMessagesResult.messages);
 				$rootScope.$broadcast('messages_downloaded', splitted.mids[channelID]);
 			})
 		})
