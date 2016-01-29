@@ -18,7 +18,7 @@
                             ng-class="{active:tab == 4}"><a
                                 class="divider_list_item text_divider"><span></span></a>
                         </li>
-                        <li ng-click="typeDividerSelect(5)"
+                        <li ng-if="regionId != 0" ng-click="typeDividerSelect(5)"
                             ng-class="{active:tab == 5}"><a
                                 class="divider_list_item online_advertise"><span></span></a>
                         </li>
@@ -34,7 +34,8 @@
                         <div ng-if="tab===2" ng-include src = "'app/uploadFile/pic/pic.html'"></div>
                         <div ng-if="tab===3" ng-include src = "'app/uploadFile/editpic/editpic.html'"></div>
                         <div ng-if="tab===4" ng-include src = "'app/uploadFile/text/text.html'"></div>
-                        <div ng-if="tab===5" ng-include src = "'app/uploadFile/advertise/advertise.html'"></div>
+                        <div ng-if="tab===5 && regionId != 0"
+                             ng-include src = "'app/uploadFile/advertise/advertise.html'"></div>
                         <!--<div ng-if="tab===6" ng-include src = "'app/uploadFile/workreport/workreport.html'"></div>-->
 
                     </div>

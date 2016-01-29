@@ -461,22 +461,6 @@ if (cluster.isMaster) {
         });
     });
     //////iman servicesssss///////////////////////
-    ////// app.post('/app/status', function (req, res) {
-    //////      console.log('Statusssssss');
-    //////      res.send({
-    ////// //////          'status': 0,
-    //////          'name':'????? ??'
-    //////      });
-    //////  });
-    /*    app.post('/app/latary', function (req, res) {
-     var query = "INSERT INTO latary (telegramID, userName ,answer" +
-     ") VALUES ('" + req.body.telegramID + "', " +
-     "'" + req.body.userName + "', " +
-     "'" + req.body.answer + "' )";
-     showDb(query).then(function (result) {
-     console.log('-----latary insert OK------');
-     });
-     });*/
     app.post('/app/consituency', function (req, res) {
         console.log('consituency', req.body);
         var search_person = "select * from people where telegramID =" + req.body.telegramID;
@@ -628,7 +612,8 @@ if (cluster.isMaster) {
             if (result.length == 0) {
                 var query = "INSERT INTO advertise (regionId,candidaId,day,count,content,titel,icon_url,userid" +
                     ") VALUES ('" + req.query.regionId + "', " +
-                    "'" + req.query.candidaId + "', " + "'" + req.query.day + "', " + "'" + req.query.count + "', " + "'" + req.query.content + "', " +
+                    "'" + req.query.candidaId + "', " + "'" + req.query.day + "', " + "'" + req.query.count + "', " + "'" +
+                    req.query.content + "', " +
                     "'" + req.query.title + "', " + "'" + req.query.iconUrl + "', " + "'" + req.query.id + "' )";
                 var version = "select * from advertise_version where regionId = '" + req.query.regionId + "'";
                 showDb(version).then(function (res) {

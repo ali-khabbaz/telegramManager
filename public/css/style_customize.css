@@ -399,13 +399,18 @@ a.im_message_from_photo {
     background-position: -10px -1591px;
 }
 
-.im_dialogs_search {
+.head_user .im_dialogs_search {
     width: 60%;
     float: left;
     margin-top: 7px;
     margin-right: 5px;
 }
-
+.contacts_wrap .nano{
+    left:-17px;
+}
+.im_dialogs_panel .im_dialogs_search{
+    width: 100%;
+}
 .im_dialogs_search_field {
     border-radius: 0;
 }
@@ -1524,16 +1529,17 @@ input:focus ~ .bar:after {
 .intro_buttons {
     margin: 20px 0 0 0;
 }
-
+.intro_buttons a{
+    margin-left: 10px;
+}
 .intro_buttons .order, .order_robot_section_link {
     background-color: #3d5afe;
     color: #fff;
-    padding: 4px 20px;
+    padding: 3px 20px;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     float: right;
-    margin-right: 34px;
 }
 
 .intro_buttons .order:hover, .order_robot_section_link:hover {
@@ -2484,7 +2490,7 @@ p.body_news {
 
 /************************* OnlineAdvertisement ********************************/
 /*fieldset.onlineAdver legend {*/
-/*width: 19%;*/
+    /*width: 19%;*/
 /*}*/
 
 fieldset.massageAdvers legend {
@@ -2599,7 +2605,7 @@ fieldset.massageAdvers legend {
     color: #333;
     font-size: 13px;
 }
-input[type='file']{
+ input[type='file']{
     display: none;
 }
 
@@ -2660,10 +2666,10 @@ input[type='file']{
 }
 
 .list_contacts {
-    margin-bottom: 10px;
-    height: 220px;
+    height: 236px;
     overflow-y: auto;
     overflow-x: hidden;
+    background-color: #fff;
 }
 
 .list_contacts ul {
@@ -2677,11 +2683,32 @@ input[type='file']{
     font-size: 13px;
     border-bottom: 1px solid #ebebeb;
 }
-.list_contacts ul li:hover{
-    cursor: pointer;
-    background-color: #dedede;
+.list_contacts ul li label{
+    display: block;
+    font-weight: normal;
 }
-/********************** ContactsUs ***************************/
+.list_contacts ul li label:hover{
+    cursor: pointer;
+    color: #5580A3;
+}
+.upload_contacts .md_modal_title{
+    padding: 0;
+}
+.upload_contacts .md_modal_head{
+    padding: 10px 0;
+}
+.upload_contacts .md_modal_head p{
+    float: right;
+    margin: 3px 10px 0 0;
+}
+.upload_contacts .md_modal_head a{
+    float: left;
+    padding: 5px 10px;
+    margin-left: 10px;
+    background-color: #618FB4;
+    color: #fff;
+}
+    /********************** ContactsUs ***************************/
 .contacts_wrapper {
     margin-top: 20px;
 }
@@ -2807,13 +2834,21 @@ p.guide_intro_item_content {
     float: right;
 }
 .image_wrapper img{
+    width: 100%;
     margin: 10px auto;
     display: table;
 }
 .panel_intro_section .panel_intro_content {
-    padding: 10px 0;
-    width: 55%;
-    float: right;
+    padding: 10px;
+    width: 96%;
+    margin: 0 auto 2em;
+    background-color: #fff;
+    border-radius: 6px;
+    border-bottom: 3px solid #b6b6b6;
+}
+.slider_intro_wrapper{
+    width: 50%;
+    margin: 0 auto;
 }
 /************************* cooperation ************************************/
 .cooperation_context_container{
@@ -2839,4 +2874,46 @@ a.link_cooperation{
     font-weight: 500;
     font-size: 14px;
     text-decoration: underline;
+}
+a.link_cooperation span{
+    color: #3D5AFE;
+}
+
+.error_block {
+    margin: 10% auto 0;
+    max-width: 700px;
+    padding: 30px 0 15px;
+}
+
+div.error_block img {
+    float: left;
+}
+
+div.error_block div.error_text {
+    float: right;
+    margin-top: 50px;
+}
+
+div.error_block div.error_text p.error_text_title {
+    color: #ef5350;
+    font-family: yekan, tahoma;
+    font-size: 36px;
+    line-height: 1;
+}
+
+div.error_block div.error_text p.error_text_title span {
+    display: block;
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+div.error_block div.error_text p.error_guide {
+    color: #78909c;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+div.error_block p.error_guide a {
+    cursor: pointer;
+    color: #233f93;
 }

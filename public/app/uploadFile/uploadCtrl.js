@@ -31,6 +31,7 @@
             $scope.uploadMessageId = 0;
             $scope.search = '';
             var userId = JSON.parse(mainFac.getUserTelegramToken()).id;
+            $scope.regionId = mainFac.getUser().split(',')[1];
             main();
             $scope.$broadcast('getChanel');
             function getUserDialogMessage(userId, accessHash) {
@@ -336,6 +337,9 @@
                     });
             }
 
+            $scope.arrayOfContactId = [];
+            $scope.sendContactId = [];
+
             $scope.sendFile = function (messageId, sendContactId) {
                 console.log('>>>>>>>>>>>>>>>>>', messageId, sendContactId);
                 if (!sendContactId) {
@@ -344,13 +348,45 @@
                     $scope.showSendFile = true;
                     $scope.uploadMessageId = messageId;
                 } else {
+                    var flag = false;
+                    if ($scope.sendContactId.length === 0) {
+                        $scope.sendContactId.push(sendContactId);
+                        flag = true;
+                    }
+                    else {
+                        for (var c in $scope.sendContactId) {
+                            console.log('ccccc', $scope.sendContactId[c]);
+                            if ($scope.sendContactId[c] === sendContactId) {
+                                $scope.sendContactId.splice(c, 1);
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!flag) {
+                        $scope.sendContactId.push(sendContactId)
+                    }
+                    console.log('----', $scope.sendContactId);
                     //mahmod mzfr 178589339 .//morteza :101777442      vahid///92476023
                     ////poorya 111035748   94030292
                     //console.log('messageId', AppPeersManager.isChannel(1023510054));
-                    AppMessagesManager.forwardMessages(sendContactId, [$scope.uploadMessageId]);
-                    $scope.showSendFile = false;
+                   /* for (var i = 0; i < 2; i++) {
+                        AppMessagesManager.forwardMessages(sendContactId, [$scope.uploadMessageId]);
+                        //AppMessagesManager.forwardMessages(arrayOfContactId[i], [$scope.uploadMessageId]);
+                    }
+                    //$scope.showSendFile = false;*/
                 }
             };
+
+            $scope.sendFileContacts = sendFileContacts;
+
+            function sendFileContacts() {
+                for (var i = 0; i < $scope.sendContactId.length; i++) {
+                    console.log('===========', $scope.sendContactId[i]);
+                    AppMessagesManager.forwardMessages($scope.sendContactId[i], [$scope.uploadMessageId]);
+                }
+                $scope.showSendFile = false;
+            }
 
             $scope.uploadedFile = function (element) {
                 $scope.$apply(function ($scope) {
@@ -395,7 +431,6 @@
                     i, temp;
                 AppMessagesManager.getConversations('', offsetIndex, 500).then(function (result) {
                     //console.log('conversationnnnnssnsn', result);
-
                     if (result.dialogs.length) {
                         offsetIndex = result.dialogs[result.dialogs.length - 1].index;
                         temp = mainFac.getDialogs();
