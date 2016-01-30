@@ -319,8 +319,8 @@ if (cluster.isMaster) {
 				var mailOptions = {
 					from: "ali khabbaz <ali.khabbaz14@gmail.com>", // sender address
 					to: req.query.email, // list of receivers
-					subject: "ali testing ✔", // Subject line
-					text: "Hello world ✔", // plaintext body
+					subject: "تغییر رمز عبور ✔", // Subject line
+					//text: "Hello world ✔", // plaintext body
 					html: "رمز عبور جدید : <b>" + newPassword + "</b>" // html body
 				}
 				smtpTransport.sendMail(mailOptions, function (error, response) {
@@ -764,7 +764,35 @@ if (cluster.isMaster) {
 			if (result > 0) {
 				query = 'update users u set u.confirmed = \'Y\' where u.idGet = ' + req.body.id_get;
 				showDb(query).then(function () {
-					res.send(data);
+
+					query = 'select email from users where u.idGet = ' + req.body.id_get;
+					showDb(query).then(function (resultSec) {
+						var smtpTransport = nodemailer.createTransport("SMTP", {
+							service: "Gmail",
+							auth: {
+								user: "ali.khabbaz14@gmail.com",
+								pass: "bahbahbah"
+							}
+						});
+						var mailOptions = {
+							from: "ali khabbaz <ali.khabbaz14@gmail.com>", // sender address
+							to: resultSec[0].email, // list of receivers
+							subject: "تراکنش موفق ✔", // Subject line
+							//text: "Hello world ✔", // plaintext body
+							html: "<b>تراکنش با موفقیت انجام شد</b>" // html body
+						}
+						smtpTransport.sendMail(mailOptions, function (error, response) {
+							if (error) {
+								console.log(error);
+							} else {
+								console.log("Message sent: " + response.message);
+								smtpTransport.close();
+								res.send(data);
+							}
+						});
+					});
+
+
 				});
 				res.send('<p>payment successful</p>');
 				//res.render('index');
