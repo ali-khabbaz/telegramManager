@@ -11,6 +11,7 @@ var express = require('./server/requires.js').express,
 	numCPUs = require('./server/requires.js').numCPUs,
 	request = require('./server/requires.js').request,
 	jwt = require('./server/requires.js').jwt,
+	nodemailer = require('./server/requires.js').nodemailer,
 	showDb = require('./server/utilities.js').showDb,
 	q = require('./server/utilities.js').q,
 	createToken = require('./server/utilities.js').createToken,
@@ -307,6 +308,7 @@ if (cluster.isMaster) {
 				});
 			} else {
 				newPassword = makeRandomString(8);
+				console.log('-----newPassword', newPassword);
 				var smtpTransport = nodemailer.createTransport("SMTP", {
 					service: "Gmail",
 					auth: {
@@ -318,7 +320,7 @@ if (cluster.isMaster) {
 					from: "ali khabbaz <ali.khabbaz14@gmail.com>", // sender address
 					to: req.query.email, // list of receivers
 					subject: "ali testing ✔", // Subject line
-					//text: "Hello world ✔", // plaintext body
+					text: "Hello world ✔", // plaintext body
 					html: "رمز عبور جدید : <b>" + newPassword + "</b>" // html body
 				}
 				smtpTransport.sendMail(mailOptions, function (error, response) {
@@ -327,7 +329,12 @@ if (cluster.isMaster) {
 					} else {
 						console.log("Message sent: " + response.message);
 						smtpTransport.close();
-						res.send('password sent');
+						query = 'UPDATE users SET password = \'' + newPassword +
+							'\' WHERE  email = \'' + req.query.email + '\'  ';
+						showDb(query).then(function () {
+							res.send('password sent');
+						});
+
 					}
 				});
 
