@@ -18,6 +18,7 @@
 		Client = require('mariasql'),
 		jwt = require('jwt-simple'),
 		sess,
+		nodemailer = require("nodemailer"),
 		passport = require('passport'),
 		local_strategy = require('passport-local').Strategy,
 		c = new Client();
@@ -43,5 +44,6 @@
 	exports.request = request;
 	exports.passport = passport;
 	exports.local_strategy = local_strategy;
+	exports.nodemailer = nodemailer;
 
 }());

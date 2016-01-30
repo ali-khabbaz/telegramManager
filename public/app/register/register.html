@@ -3,14 +3,14 @@
     <section class="register_section">
         <header class="header_register_section">
             <a class="logo_visitor clearfix"><img src="images/melegramicon.png">
-
                 <h3>ملگرام</h3></a>
         </header>
         <main>
             <div class="tabs_wrapper">
                 <ul class="list_tabs clearfix">
                     <li ng-class="{tab_active : reg.userValue.panel_type == 1}" class="list_tab_item " ng-click="reg.userValue.panel_type = 1"><a href="">خرید پنل مدیریت</a></li>
-                    <li ng-class="{tab_active : reg.userValue.panel_type == 2}" class="list_tab_item" ng-click="reg.userValue.panel_type = 2"><a href="" >خرید پنل ویژه انتخابات</a></li>
+                    <li ng-class="{tab_active : reg.userValue.panel_type == 2}" class="list_tab_item" ng-click="reg.userValue.panel_type = 2"><a href="">خرید پنل ویژه انتخابات</a></li>
+                    <li ng-class="{tab_active : reg.userValue.panel_type == 3}" class="list_tab_item" ng-click="reg.userValue.panel_type = 3"><a href="">فراموشی رمز عبور</a></li>
                 </ul>
             </div>
             <div ng-if="reg.userValue.panel_type == 1" class="tab-content clearfix">
@@ -18,26 +18,27 @@
                     <form name="myForm" ng-submit='reg.cash(reg.userValue.panel_type)'>
                         <div class="content_form_register">
                             <div class="group user_name_group">
-                                <input ng-model="reg.userValue.userName" name="name" id="name"
-                                       pattern=".{5,}"
-                                       required/>
-
+                                <input ng-model="reg.userValue.userName" name="name" id="name" pattern=".{5,}" required/>
                                 <i class="icon"></i>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label for="name">نام کاربری</label>
-
                                 <div class="error">
-                                    <p class="pattern_error"
-                                       ng-if="myForm.name.$invalid && !myForm.name.$pristine">نام کاربری باید بیشتر از 5
-                                        کاراکتر باشد.</p>
+                                    <p class="pattern_error" ng-if="myForm.name.$invalid && !myForm.name.$pristine">نام کاربری باید بیشتر از 5 کاراکتر باشد.</p>
                                 </div>
-
+                            </div>
+                            <div class="group user_email_group">
+                                <input ng-model="reg.userValue.email" name="email" id="email" ng-pattern="reg.emailPattern" required/>
+                                <i class="icon"></i>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label for="email">پست الکترونیکی</label>
+                                <div class="error">
+                                    <p class="pattern_error" ng-if="myForm.email.$invalid && !myForm.email.$pristine">پست الکترونیکی معتبر نمی باشد</p>
+                                </div>
                             </div>
                             <div class="group phone_group">
-                                <input name="phone" id='phone' ng-model="reg.userValue.phone"
-                                       ng-pattern="reg.phonePattern" required>
-
+                                <input name="phone" id='phone' ng-model="reg.userValue.phone" ng-pattern="reg.phonePattern" required>
                                 <p class="pattern_error" ng-show="myForm.phone.$error.pattern">
                                     شماره تلفن صحیح نیست(لطفا بدون صفر وارد نمایید)</p>
                                 <i class="icon"></i>
@@ -46,13 +47,9 @@
                                 <label for="phone">شماره موبایل</label>
                             </div>
                             <div class="group pass_group">
-                                <input type="password" name="password" id="password"
-                                       ng-model="reg.userValue.pass"
-                                       pattern=".{6,}" required/>
-
+                                <input type="password" name="password" id="password" ng-model="reg.userValue.pass" pattern=".{6,}" required/>
                                 <div class="error">
-                                    <p class="pattern_error"
-                                       ng-show="myForm.password.$invalid && !myForm.password.$pristine">
+                                    <p class="pattern_error" ng-show="myForm.password.$invalid && !myForm.password.$pristine">
                                         رمز شما باید حداقل 6 کاراکتر یا بیشتر باشد</p>
                                 </div>
                                 <i class="icon"></i>
@@ -61,13 +58,8 @@
                                 <label for="password">رمز عبور</label>
                             </div>
                             <div class="group pass_group">
-                                <input id="re-pass"
-                                       name="check" ng-model="reg.chkPwd"
-                                       type="password"
-                                       wj-validation-error="reg.chkPwd != reg.userValue.pass ? 'Passwords don\'t match' : ''"/>
-
-                                <div class="error"
-                                     ng-show="myForm.check.$invalid && !myForm.check.$pristine">
+                                <input id="re-pass" name="check" ng-model="reg.chkPwd" type="password" wj-validation-error="reg.chkPwd != reg.userValue.pass ? 'Passwords don\'t match' : ''" />
+                                <div class="error" ng-show="myForm.check.$invalid && !myForm.check.$pristine">
                                     <p class="pattern_error">متاسفانه ، رمز شما تطابق ندارد</p>
                                 </div>
                                 <i class="icon"></i>
@@ -82,61 +74,28 @@
                     </form>
                 </div>
             </div>
-
             <div ng-if="reg.userValue.panel_type == 2" class="tab-content clearfix">
                 <div class="register_form_wrapper clearfix">
                     <form name="myForm" ng-submit='reg.cash(reg.userValue.panel_type)'>
                         <div class="content_form_register">
                             <div class="group user_name_group">
-                                <input ng-model="reg.userValue.userName" name="name" id="name"
-                                       pattern=".{5,}"
-                                       required/>
-
+                                <input ng-model="reg.userValue.userName" name="name" id="name" pattern=".{5,}" required/>
                                 <i class="icon"></i>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label for="name">نام کاربری</label>
-
                                 <div class="error">
-                                    <p class="pattern_error"
-                                       ng-if="myForm.name.$invalid && !myForm.name.$pristine">نام کاربری باید بیشتر از 5
-                                        کاراکتر باشد.</p>
+                                    <p class="pattern_error" ng-if="myForm.name.$invalid && !myForm.name.$pristine">نام کاربری باید بیشتر از 5 کاراکتر باشد.</p>
                                 </div>
-
-                            </div>
-                            <div class="group" >
-                                <div
-                                        name="state"
-                                        id="state" angucomplete-alt placeholder="نام استان"
-                                        focus-in="reg.anguCompleteClearSrchFld('state')"
-                                        maxlength="50" pause="100"
-                                        local-data="reg.states"
-                                        search-fields="name"
-                                        title-field="name"
-                                        input-class="region_input"
-                                        selected-object="reg.selectState"
-                                        minlength="0" ></div>
                             </div>
                             <div class="group">
-                                <div  type="text"
-                                      name="city"
-                                      id="city" angucomplete-alt placeholder="نام شهر"
-                                      focus-in="reg.anguCompleteClearSrchFld('city')"
-                                      required
-                                      maxlength="50" pause="100"
-                                      local-data="reg.citys"
-                                      search-fields="city"
-                                      title-field="city"
-                                      selected-object="reg.selectCity"
-                                      input-class="region_input"
-                                      minlength="0"
-                                      remote-url="/app/getCity?ss={{reg.stateId}}"
-                                ></div>
+                                <div name="state" id="state" angucomplete-alt placeholder="نام استان" focus-in="reg.anguCompleteClearSrchFld('state')" maxlength="50" pause="100" local-data="reg.states" search-fields="name" title-field="name" input-class="region_input" selected-object="reg.selectState" minlength="0"></div>
+                            </div>
+                            <div class="group">
+                                <div type="text" name="city" id="city" angucomplete-alt placeholder="نام شهر" focus-in="reg.anguCompleteClearSrchFld('city')" required maxlength="50" pause="100" local-data="reg.citys" search-fields="city" title-field="city" selected-object="reg.selectCity" input-class="region_input" minlength="0" remote-url="/app/getCity?ss={{reg.stateId}}"></div>
                             </div>
                             <div class="group phone_group">
-                                <input name="phone" id='phone' ng-model="reg.userValue.phone"
-                                       ng-pattern="reg.phonePattern" required>
-
+                                <input name="phone" id='phone' ng-model="reg.userValue.phone" ng-pattern="reg.phonePattern" required>
                                 <p class="pattern_error" ng-show="myForm.phone.$error.pattern">
                                     شماره تلفن صحیح نیست(لطفا بدون صفر وارد نمایید)</p>
                                 <i class="icon"></i>
@@ -145,13 +104,9 @@
                                 <label for="phone">شماره موبایل</label>
                             </div>
                             <div class="group pass_group">
-                                <input type="password" name="password" id="password"
-                                       ng-model="reg.userValue.pass"
-                                       pattern=".{6,}" required/>
-
+                                <input type="password" name="password" id="password" ng-model="reg.userValue.pass" pattern=".{6,}" required/>
                                 <div class="error">
-                                    <p class="pattern_error"
-                                       ng-show="myForm.password.$invalid && !myForm.password.$pristine">
+                                    <p class="pattern_error" ng-show="myForm.password.$invalid && !myForm.password.$pristine">
                                         رمز شما باید حداقل 6 کاراکتر یا بیشتر باشد</p>
                                 </div>
                                 <i class="icon"></i>
@@ -160,13 +115,8 @@
                                 <label for="password">رمز عبور</label>
                             </div>
                             <div class="group pass_group">
-                                <input id="re-pass"
-                                       name="check" ng-model="reg.chkPwd"
-                                       type="password"
-                                       wj-validation-error="reg.chkPwd != reg.userValue.pass ? 'Passwords don\'t match' : ''"/>
-
-                                <div class="error"
-                                     ng-show="myForm.check.$invalid && !myForm.check.$pristine">
+                                <input id="re-pass" name="check" ng-model="reg.chkPwd" type="password" wj-validation-error="reg.chkPwd != reg.userValue.pass ? 'Passwords don\'t match' : ''" />
+                                <div class="error" ng-show="myForm.check.$invalid && !myForm.check.$pristine">
                                     <p class="pattern_error">متاسفانه ، رمز شما تطابق ندارد</p>
                                 </div>
                                 <i class="icon"></i>
@@ -177,6 +127,27 @@
                         </div>
                         <div class="buttons_wrapper clearfix">
                             <button class="btn_register" type="submit" ng-disabled="form.$invalid">سفارش</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div ng-if="reg.userValue.panel_type == 3" class="tab-content clearfix">
+                <div class="register_form_wrapper clearfix ">
+                    <form name="myForm" ng-submit='reg.forgottenPassword(reg.userValue.panel_type)'>
+                        <div class="content_form_register">
+                            <div class="group user_email_group">
+                                <input ng-model="reg.userValue.email" name="email" id="email" ng-pattern="reg.emailPattern" required/>
+                                <i class="icon"></i>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label for="email">پست الکترونیکی</label>
+                                <div class="error">
+                                    <p class="pattern_error" ng-if="myForm.email.$invalid && !myForm.email.$pristine">پست الکترونیکی معتبر نمی باشد</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons_wrapper clearfix">
+                            <button class="btn_register" type="submit" ng-disabled="form.$invalid">ارسال</button>
                         </div>
                     </form>
                 </div>
@@ -184,4 +155,3 @@
         </main>
     </section>
 </div>
-

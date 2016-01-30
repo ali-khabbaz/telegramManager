@@ -14,7 +14,9 @@
 			getStates();
 			vm.states = [];
 			vm.cash = cash;
+			vm.forgottenPassword = forgottenPassword;
 			vm.phonePattern = /^(9)[0-9]{9}$/;
+			vm.emailPattern = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
 			vm.userValue = {
 				regionId: '',
 				phone: '',
@@ -122,30 +124,23 @@
 						}).error(function (err) {
 							console.log('error is', err);
 						});
-
-
-						/*$http({
-						    method: 'POST',
-						    url: url,
-						    data: {
-						        token: res.token
-						    },
-						    //params: vm.userValue,
-						    headers: {
-						        'Content-Type': 'application/json'
-						    }
-						}).success(function (res) {
-						    console.log('payment------------', res);
-						    if (res > 0) {
-						        //$location.url('http://payline.ir/payment/gateway-' + res);
-						        //$window.location.href = 'http://payline.ir/payment/gateway-' + res;
-						    }
-						}).error(function (err) {
-						    console.log('payment-----err-------', err);
-						});*/
 					}
 				}).error(function (err) {
 					console.log('error is', err);
+				});
+			}
+
+			function forgottenPassword(panel_type) {
+				var url = mainFac.getApiUrl() + 'app/forgottenPassword';
+				$http({
+					method: 'POST',
+					url: url,
+					params: vm.userValue
+				}).success(function (res) {
+					console.log('----forgottenPassword------------', res);
+
+				}).error(function (err) {
+					console.log('forgottenPassword error is', err);
 				});
 			}
 		}
