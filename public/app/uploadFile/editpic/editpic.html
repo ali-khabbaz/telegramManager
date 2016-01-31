@@ -1,0 +1,298 @@
+<div class="edit_pic_wrapper" style="height: 94vh">
+    <canvas id="collage" width="740" height="480"></canvas>
+    <aside class="layers">
+        <h2>Layers</h2>
+        <ul class="list_actions">
+            <li class="background">
+                <ul class="listLayers_upload">
+                    <li class="clearfix">
+                        <img src="images/background.png"/>
+
+                        <p>background</p>
+
+                        <div class="visible"></div>
+                    </li>
+                </ul>
+                <ul class="listButton_layer">
+                    <li class="remove"></li>
+                    <li class="up"></li>
+                    <li class="down"></li>
+                </ul>
+            </li>
+            <li class="options clearfix">
+                <div class="filter_pic clearfix">
+                    <label for="Blending">Blending:</label>
+                    <select id="Blending" name="blending">
+                        <option value="source-over">Normal</option>
+                        <option value="xor">XOR</option>
+                        <option value="copy">Copy</option>
+                        <option value="lighter">Lighter</option>
+                    </select>
+                </div>
+                <div class="filter_pic clearfix">
+                    <label for="Opacity">Opacity:</label>
+                    <select id="opacity" name="opacity">
+                        <option value="1" selected="selected">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
+                </div>
+                <div class="filter_pic clearfix">
+                    <label for="Shadow">Shadow:</label>
+                    <select id="Shadow" name="shadow">
+                        <option value="true">On</option>
+                        <option value="false">Off</option>
+                    </select>
+                </div>
+            </li>
+
+            <li class="form_insert clearfix">
+
+                <form class="text_layer clearfix">
+
+                    <div class="textInsert_uploadPage clearfix">
+                        <label for="text">Add text:</label>
+                        <input id="text" type="text" name="text" value="Sample text..."/>
+                    </div>
+                    <div class="options_text clearfix">
+                        <select name="font-color">
+                            <option value="#000">Black</option>
+                            <option value="#0f0">Green</option>
+                            <option value="#00f">Blue</option>
+                        </select>
+                        <select name="font-family">
+                            <option value="Arial">Arial</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Courier">Courier</option>
+                        </select>
+                        <select name="font-size">
+                            <option value="24">24px</option>
+                            <option value="48">48px</option>
+                            <option value="72">72px</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="test">AddTextLayer</button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+
+
+    </aside>
+
+    <footer class="search">
+        <div class="searchImg_uploadPage clearfix">
+            <form action="#" class="image_search clearfix">
+                <input type="text" name="q" value="funny cats"/>
+                <button type="submit">جستجو</button>
+            </form>
+        </div>
+        <div class="clearfix">
+            <ul>
+                <li><img src="images/Poster Entekhabat (email).jpg" title="kitty wink- 173"></li>
+                <li><img src="images/images (2).jpg" title=".." class="layer"></li>
+                <li><img src="images/3038495484.jpg" title="Reading with Poek"></li>
+                <li><img src="images/images.jpg" title="KING OF AFRICA"></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script type="text/javascript"> var jCollage = null;
+    $(document).ready(function () {
+        jCollage = new Collage("#collage");
+        jCollage.setBackgroundColor("#b6b6b6");
+
+        $(".search img").on("click", function () {
+            jCollage.addLayer($(this).context).setTitle($(this).attr("title"));
+            updateLayers(jCollage.getLayers());
+            $("#layer_" + (jCollage.getLayers().length - 1)).addClass("selected");
+        });
+
+
+        $(".layers .layer").on("click", function () {
+            $(".layers .layer").removeClass("selected");
+            $(this).addClass("selected");
+            setSettings($(this).attr("id").substr(6));
+        });
+
+        $(".layers .background .visible").click(function () {
+
+            if ($(this).html() == "") {
+                jCollage.setBackgroundImage($(".layers .background img")[0]);
+                $(this).html("&radic;");
+            } else {
+                jCollage.setBackgroundImage(null);
+                $(this).html("");
+            }
+        });
+
+        $(".layers .layer .visible").on("click", function () {
+
+            if ($(this).html() == "") {
+                $(this).html("&radic;");
+            } else {
+                $(this).html("");
+            }
+            jCollage.getLayer($(this).parent().attr("id").substr(6)).toggleVisible();
+            jCollage.redraw();
+        });
+
+        $(".options select[name=shadow]").change(function () {
+            if (getSelectedLayer() != null) {
+                if ($(".options select[name=shadow]").val() == "true") {
+                    getSelectedLayer().setShadow(true);
+                } else {
+                    getSelectedLayer().setShadow(false);
+                }
+                jCollage.redraw();
+            }
+        });
+
+        $(".options select[name=opacity]").change(function () {
+
+            if (getSelectedLayer() != null) {
+                getSelectedLayer().setOpacity($(".options select[name=opacity]").val());
+                jCollage.redraw();
+            }
+        });
+
+        $(".options select[name=blending]").change(function () {
+            if (getSelectedLayer() != null) {
+                getSelectedLayer().setCompositeOperation($(".options select[name=blending]").val());
+                jCollage.redraw();
+            }
+        });
+
+        $(".remove").click(function () {
+            if (getSelectedLayer() != null) {
+                jCollage.removeLayer($(".layers .selected").attr("id").substr(6));
+                updateLayers(jCollage.getLayers());
+            }
+        });
+
+        $(".up").click(function () {
+
+            if (getSelectedLayer() != null) {
+                var selectedLayer = $(".layers .selected").attr("id").substr(6);
+                if (jCollage.moveLayerUp(selectedLayer)) {
+                    updateLayers(jCollage.getLayers());
+                    $("#layer_" + (parseInt(selectedLayer) + 1)).addClass("selected");
+                }
+            }
+        });
+
+        $(".down").click(function () {
+
+            if (getSelectedLayer() != null) {
+                var selectedLayer = $(".layers .selected").attr("id").substr(6);
+                if (jCollage.moveLayerDown(selectedLayer)) {
+                    updateLayers(jCollage.getLayers());
+                    $("#layer_" + (parseInt(selectedLayer) - 1)).addClass("selected");
+                }
+            }
+        });
+
+        //$(".search form.image-search").submit(function(){
+        //	$(".search li").remove();
+        //	$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$(".search input[name=q]").val()+"&tagmode=any&format=json&jsoncallback=?",
+        //		function(data) {
+        //		$.each(data.items, function(i,item) {
+        //			var img = $("<img/>").attr("src", item.media.m);
+        //			img.attr("title", item.title);
+        //			$("<li></li>").append(img).appendTo(".search ul");
+        //			if ( i == 8 ) return false;
+        //		});
+        //	});
+        //	return false;
+        //});
+        $(".search li img").each(function (i, item) {
+            var img = $("<img/>").attr("src", item);
+            img.attr("title", item);
+            //$("<li></li>").append(img).appendTo(".search ul");
+            if (i == 8) return false;
+        });
+
+        $(".test").click(function () {
+            var fontFamily = $('select[name=font-family]').val();
+            var fontColor = $('select[name=font-color]').val();
+            var fontSize = parseInt($(' select[name=font-size]').val());
+            var text = $('input[name=text]').val();
+
+            jCollage.addTextLayer(text, fontFamily, fontSize, fontColor);
+            updateLayers(jCollage.getLayers());
+
+            $("#layer_" + (jCollage.getLayers().length - 1)).addClass("selected");
+
+            return false;
+        });
+
+        /*$(".form_insert form.text-layer").submit(function () {
+         console.log(1);
+         var fontFamily = $('.search form.text-layer select[name=font-family]').val();
+         var fontColor = $('.search form.text-layer select[name=font-color]').val();
+         var fontSize = parseInt($('.search form.text-layer select[name=font-size]').val());
+         var text = $('.search form.text-layer input[name=text]').val();
+
+         jCollage.addTextLayer(text, fontFamily, fontSize, fontColor);
+         updateLayers(jCollage.getLayers());
+
+         $("#layer_" + (jCollage.getLayers().length - 1)).addClass("selected");
+
+         return false;
+         });*/
+
+    });
+
+    function getSelectedLayer() {
+        if ($(".layers .selected").length == 0) {
+            return null;
+        }
+        return jCollage.getLayer($(".layers .selected").attr("id").substr(6))
+    }
+
+    function setSettings(id) {
+        var layer = jCollage.getLayer(id);
+        $(".options select[name=blending]").removeAttr("selected");
+        $(".options select[name=blending] option[value=" + layer.getCompositeOperation() + "]").attr("selected", "selected");
+
+        $(".options select[name=opacity]").removeAttr("selected");
+        $(".options select[name=opacity] option[value=" + layer.getOpacity() + "]").attr("selected", "selected");
+
+        $(".options select[name=shadow]").removeAttr("selected");
+        $(".options select[name=shadow] option[value=" + layer.hasShadow() + "]").attr("selected", "selected");
+
+    }
+
+    function updateLayers(layers) {
+        $(".layers li.layer").remove();
+        for (i in layers) {
+            $(".listLayers_upload").prepend(createLayerRow(i, layers[i]));
+
+        }
+    }
+
+    function createLayerRow(id, layer) {
+        var row = $("<li class='clearfix'></li>").addClass("layer").attr("id", "layer_" + id);
+        if (layer instanceof Layer) {
+            var icon = $("<img/>").attr("src", layer.getImage().src);
+        }
+        var heading = $("<p></p>").text(layer.getTitle().substr(0, 14));
+        var visible = $("<div></div>").addClass("visible");
+        if (layer.isVisible()) {
+            visible.html("&radic;");
+        }
+
+        row.append(icon).append(heading).append(visible);
+
+        return row;
+    }</script>
+</div>
+

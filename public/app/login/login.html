@@ -1,0 +1,52 @@
+<div ng-controller="loginCtrl as login">
+    <!--<p>Login</p>-->
+<!--<input same-as name="telelphone" ng-model="login.telelphone" type="text" placeholder="+989151234567" required autofocus>-->
+<!--<br>-->
+<!--<button type="button" class="telegram_btn" ng-if="!login.credentials.phoneCodeHash" ng-click="login.sendTelCode(login.telelphone)">Send Code</button>-->
+<!--<input ng-model="login.credentials.phoneCode" ng-if="login.credentials.phoneCodeHash" type="text" placeholder="Sent code">-->
+<!--<button type="button" class="telegram_btn" ng-if="login.credentials.phoneCodeHash" ng-click="login.telLogin()">O K</button>-->
+<div class="page_wrap">
+    <div class="login_page_wrap" style="background: #e7ebf0;">
+        <div class="login_head_bg"></div>
+        <div class="login_page">
+            <div class="login_head_wrap clearfix">
+                <a class="login_head_logo_link">
+                    <a class="icon icon-tg-title"><span>ملگرام</span></a>
+                </a>
+            </div>
+            <div class="login_form_wrap">
+                <form>
+                    <h3 class="login_form_head">ورود</h3>
+                    <p class="login_form_lead">.لطفا شماره تلفن خود را مانند نمونه وارد کنید</p>
+                    <div class="login_phone_groups_wrap clearfix">
+                        <div class="group group_phone_number">
+                            <input type="text" required="" ng-model="login.telelphone" required autofocus>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>شماره تلفن:</label>
+                        </div>
+                        <div class="example">
+                            <p>+98</p>
+                        </div>
+                        <div ng-show="login.credentials.phoneCodeHash">
+                            <div class="group group_phone_number">
+                                <input type="text"
+                                       ng-model="login.credentials.phoneCode"
+                                       ng-if="login.credentials.phoneCodeHash" required autofocus>
+
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>کد ارسال شده</label>
+                            </div>
+                        </div>
+                        <div class="footer_login_form">
+                            <button ng-if="!login.credentials.phoneCodeHash" ng-click="login.sendTelCode(login.telelphone)">ارسال</button>
+                            <button ng-if="login.credentials.phoneCodeHash" ng-click="login.telLogin()">تایید</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
