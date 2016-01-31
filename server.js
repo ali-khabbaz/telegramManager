@@ -7,9 +7,11 @@ var express = require('./server/requires.js').express,
     bodyParser = require('./server/requires.js').bodyParser,
     cookieParser = require('./server/requires.js').cookieParser,
     decode = require('./server/utilities.js').decode,
+    makeRandomString = require('./server/utilities.js').makeRandomString,
     numCPUs = require('./server/requires.js').numCPUs,
     request = require('./server/requires.js').request,
     jwt = require('./server/requires.js').jwt,
+    nodemailer = require('./server/requires.js').nodemailer,
     showDb = require('./server/utilities.js').showDb,
     q = require('./server/utilities.js').q,
     createToken = require('./server/utilities.js').createToken,
@@ -168,13 +170,18 @@ if (cluster.isMaster) {
      });
      });*/
     app.post('/app/register', function (req, res) {
-        console.log('---------', req.query, req.body);
+        //console.log('register---------', req.query, req.body);
         var search_q = "select * from users where userName = '" + req.query.userName + "'";
         showDb(search_q).then(function (data) {
             if (data.length == 0) {
-                var query = "INSERT INTO users (userName,password,regionId,phone " +
-                    ") VALUES ('" + req.query.userName + "' , '" + req.query.pass + "', " +
-                    "'" + req.query.regionId + "', " + "'" + req.query.phone + "' )";
+                if (!req.query.regionId) {
+                    req.query.regionId = 0;
+                }
+                var query = 'INSERT INTO users \
+                    (userName,password,regionId,phone,panelType,email ) \
+                    VALUES \
+                    (\'' + req.query.userName + '\' , \'' + req.query.pass + '\', ' + req.query.regionId +
+                    ', ' + req.query.phone + ',' + req.query.panel_type + ',\'' + req.query.email + '\' )';
                 showDb(query).then(function () {
                     query = 'select u.id id from users u where u.userName = \'' + req.query.userName + '\' ';
                     showDb(query).then(function (result) {
@@ -290,7 +297,50 @@ if (cluster.isMaster) {
             });
         });
     });
+    app.post('/app/forgottenPassword', function (req, res) {
+        console.log('forgottenPassword---------', req.query.email);
+        var search_q = "select id from users where email = '" + req.query.email + "'",
+            newPassword;
+        showDb(search_q).then(function (data) {
+            if (data.length == 0) {
+                res.send({
+                    email: 'email not exist'
+                });
+            } else {
+                newPassword = makeRandomString(8);
+                console.log('-----newPassword', newPassword);
+                var smtpTransport = nodemailer.createTransport("SMTP", {
+                    service: "Gmail",
+                    auth: {
+                        user: "ali.khabbaz14@gmail.com",
+                        pass: "bahbahbah"
+                    }
+                });
+                var mailOptions = {
+                    from: "ali khabbaz <ali.khabbaz14@gmail.com>", // sender address
+                    to: req.query.email, // list of receivers
+                    subject: "تغییر رمز عبور ✔", // Subject line
+                    //text: "Hello world ✔", // plaintext body
+                    html: "رمز عبور جدید : <b>" + newPassword + "</b>" // html body
+                }
+                smtpTransport.sendMail(mailOptions, function (error, response) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("Message sent: " + response.message);
+                        smtpTransport.close();
+                        query = 'UPDATE users SET password = \'' + newPassword +
+                            '\' WHERE  email = \'' + req.query.email + '\'  ';
+                        showDb(query).then(function () {
+                            res.send('password sent');
+                        });
 
+                    }
+                });
+
+            }
+        });
+    });
     app.post('/app/jobs', jobs);
     app.post('/app/articleList', article_list);
     app.post('/app/video', video);
@@ -683,6 +733,53 @@ if (cluster.isMaster) {
             res.send(result);
         });
     });
+
+
+    app.post('/app/forgottenPassword', function (req, res) {
+        console.log('forgottenPassword---------', req.query.email);
+        var search_q = "select id from users where email = '" + req.query.email + "'",
+            newPassword;
+        showDb(search_q).then(function (data) {
+            if (data.length == 0) {
+                res.send({
+                    email: 'email not exist'
+                });
+            } else {
+                newPassword = makeRandomString(8);
+                console.log('-----newPassword', newPassword);
+                var smtpTransport = nodemailer.createTransport("SMTP", {
+                    service: "Gmail",
+                    auth: {
+                        user: "ali.khabbaz14@gmail.com",
+                        pass: "bahbahbah"
+                    }
+                });
+                var mailOptions = {
+                    from: "ali khabbaz <ali.khabbaz14@gmail.com>", // sender address
+                    to: req.query.email, // list of receivers
+                    subject: "تغییر رمز عبور ✔", // Subject line
+                    //text: "Hello world ✔", // plaintext body
+                    html: "رمز عبور جدید : <b>" + newPassword + "</b>" // html body
+                }
+                smtpTransport.sendMail(mailOptions, function (error, response) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("Message sent: " + response.message);
+                        smtpTransport.close();
+                        query = 'UPDATE users SET password = \'' + newPassword +
+                            '\' WHERE  email = \'' + req.query.email + '\'  ';
+                        showDb(query).then(function () {
+                            res.send('password sent');
+                        });
+
+                    }
+                });
+
+            }
+        });
+    });
+
     app.post('/app/paymentCode', function (req, res) {
         console.log('+req.query.amount', req.query, req.body, +req.query.amount);
         var curl = require('curlrequest'),
@@ -713,7 +810,35 @@ if (cluster.isMaster) {
             if (result > 0) {
                 query = 'update users u set u.confirmed = \'Y\' where u.idGet = ' + req.body.id_get;
                 showDb(query).then(function () {
-                    res.send(data);
+
+                    query = 'select email from users where u.idGet = ' + req.body.id_get;
+                    showDb(query).then(function (resultSec) {
+                        var smtpTransport = nodemailer.createTransport("SMTP", {
+                            service: "Gmail",
+                            auth: {
+                                user: "ali.khabbaz14@gmail.com",
+                                pass: "bahbahbah"
+                            }
+                        });
+                        var mailOptions = {
+                            from: "ali khabbaz <ali.khabbaz14@gmail.com>", // sender address
+                            to: resultSec[0].email, // list of receivers
+                            subject: "تراکنش موفق ✔", // Subject line
+                            //text: "Hello world ✔", // plaintext body
+                            html: "<b>تراکنش با موفقیت انجام شد</b>" // html body
+                        }
+                        smtpTransport.sendMail(mailOptions, function (error, response) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                console.log("Message sent: " + response.message);
+                                smtpTransport.close();
+                                res.send(data);
+                            }
+                        });
+                    });
+
+
                 });
                 res.send('<p>payment successful</p>');
                 //res.render('index');
@@ -723,6 +848,7 @@ if (cluster.isMaster) {
             }
         });
     });
+
     function doubleCheck(trans_id, id_get) {
         var q = require('q'),
             dfd = q.defer(),
@@ -748,16 +874,3 @@ if (cluster.isMaster) {
     app.listen(PORT);
     console.log('listening on port', PORT);
 }
-
-
-/*app.post('/profile', multer({
- dest: 'uploads/',
- rename: function (fieldname, filename, req, res) {
- var newDestination = path.join(req.body.hdnUserName);
- return newDestination;
- }
- }).single('uploadedFile'), function (req, res, next) {
- res.end('over');
- });*/
-
-//{ trans_id: '10031527', id_get: '9571377' }

@@ -26,6 +26,7 @@
                 <li class="clearfix"  data-ng-repeat="profile in contacts | filter:search" >
                     <label for="vahid_{{$index}}">
                         <input id="vahid_{{$index}}" type="checkbox" ng-click="sendFile(0,profile.peerID);">
+
                         {{profile.peerData.username}}
                         {{profile.peerData.first_name}}
                         {{profile.peerData.title}}
